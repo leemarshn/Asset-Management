@@ -1,2 +1,4 @@
-package com.lenhac.deprakt.models;public class Role {
+package com.lenhac.deprakt.models;
+
+public class Role {
 }
