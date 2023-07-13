@@ -25,8 +25,8 @@
 }
 
 .rounded-left {
-    border-top-left-radius: 15px !important;
-    border-bottom-left-radius: 15px !important;
+    border-top-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
 }
 #department {
     border-top-right-radius: 0 !important;
@@ -35,10 +35,15 @@
 }
 
 #search-button {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     color: white;
     background-color: red;
+}
+
+
+.update-button {
+    margin-bottom: 10px !important;
 }
 
 .footer {
