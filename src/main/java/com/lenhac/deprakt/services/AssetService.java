@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -35,6 +36,12 @@ public class AssetService {
         return depreciationDate.format(formatter);
     }
 
+    public String currencyFormat(double num) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        return decimalFormat.format(num);
+    }
+
+
     public List<AssetDTO> getAllAssets() {
         List<Asset> assets = assetRepository.findAll();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -47,7 +54,7 @@ public class AssetService {
                     if (purchaseDate != null) {
                         depreciationDate = calculateDepreciationDate(dateFormat.format(purchaseDate), shelfLife);
                     }
-                    return new AssetDTO(asset.getId(), asset.getName(), asset.getUser(), asset.getValue(), depreciationDate);
+                    return new AssetDTO(asset.getId(), asset.getName(), asset.getUser(), currencyFormat(asset.getValue()), depreciationDate);
                 })
                 .collect(Collectors.toList());
     }

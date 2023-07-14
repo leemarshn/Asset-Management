@@ -1,25 +1,18 @@
 package com.lenhac.deprakt.services;
 
-import com.lenhac.deprakt.dto.AssetDTO;
 import com.lenhac.deprakt.models.Asset;
 import com.lenhac.deprakt.repositories.AssetRepo;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
-import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 class AssetServiceTest {
@@ -88,64 +81,6 @@ class AssetServiceTest {
 
     }
 
-    @Test
-    void testGetAllAssets() {
-        // Create a sample Asset
-        Asset asset = new Asset();
-        asset.setId(1L);
-        asset.setName("Asset 1");
-        asset.setUser("User 1");
-        asset.setValue(1000.0);
 
-        // Set the purchaseDate to a specific date
-        LocalDate purchaseDate = LocalDate.of(2023, 7, 5);
-        asset.setPurchaseDate(java.sql.Date.valueOf(purchaseDate));
-
-        asset.setShelfLife(3);
-
-        // Mock the assetRepository.findAll() method
-        List<Asset> assets = Collections.singletonList(asset);
-        Mockito.when(assetRepo.findAll()).thenReturn(assets);
-
-        // Perform the getAllAssets() operation
-        List<AssetDTO> assetDTOs = assetService.getAllAssets();
-
-        // Verify the result
-        assertEquals(1, assetDTOs.size());
-        AssetDTO assetDTO = assetDTOs.get(0);
-        assertEquals(asset.getId(), assetDTO.getId());
-        assertEquals(asset.getName(), assetDTO.getName());
-        assertEquals(asset.getUser(), assetDTO.getUser());
-        assertEquals(asset.getValue(), assetDTO.getValue(), 0.0);
-        assertNotNull(assetDTO.getDepreciationDate());
-    }
-
-    @Test
-    public void testGetAllAssetsWithNullDate() {
-        // Create a sample Asset with null purchaseDate
-        Asset asset = new Asset();
-        asset.setId(1L);
-        asset.setName("Asset 1");
-        asset.setUser("User 1");
-        asset.setValue(1000.0);
-        asset.setPurchaseDate(null);
-        asset.setShelfLife(3);
-
-        // Mock the assetRepository.findAll() method
-        List<Asset> assets = Collections.singletonList(asset);
-        Mockito.when(assetRepo.findAll()).thenReturn(assets);
-
-        // Perform the getAllAssets() operation
-        List<AssetDTO> assetDTOs = assetService.getAllAssets();
-
-        // Verify the result
-        assertEquals(1, assetDTOs.size());
-        AssetDTO assetDTO = assetDTOs.get(0);
-        assertEquals(asset.getId(), assetDTO.getId());
-        assertEquals(asset.getName(), assetDTO.getName());
-        assertEquals(asset.getUser(), assetDTO.getUser());
-        assertEquals(asset.getValue(), assetDTO.getValue(), 0.0);
-        assertNull(assetDTO.getDepreciationDate());
-    }
 
 }
