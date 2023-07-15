@@ -6,9 +6,13 @@ import com.lenhac.deprakt.models.Asset;
 import com.lenhac.deprakt.repositories.AssetRepo;
 import com.lenhac.deprakt.services.AssetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -128,4 +132,14 @@ public class MainController {
         }
         return "redirect:/";
     }
+
+    @ExceptionHandler(Exception.class)
+    public String handleError(Exception exception, Model model) {
+        String message = "Oops! Something went wrong. We couldn't find the page you were looking for.";
+        if (exception.getMessage() != null) {
+            model.addAttribute("error", message);
+        }
+        return "index";
+    }
+
 }

@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -68,17 +69,22 @@ class AssetServiceTest {
         assertEquals(localDate, sqlPurchaseDate.toLocalDate());
         assertEquals("Sample Notes", savedAsset.getNotes());
     }
-
     @Test
-    void calculateDepreciationDate() {
-        AssetService assetService = new AssetService(assetRepo);
-
-        String purchaseDate = "2022-01-17";
+    public void calculateDepreciationDate_ReturnsDepreciationDate() throws Exception {
+        Date purchaseDateString = Date.valueOf("2023-02-11");
         int shelfLife = 6;
-        String expectedDepreciationDate = "January 17th 2028";
-        String actualDepreciationDate = assetService.calculateDepreciationDate(purchaseDate, shelfLife);
-        assertEquals(expectedDepreciationDate, actualDepreciationDate);
+        String expectedDepreciationDate = "February, 2029";
 
+        String actualDepreciationDate = AssetService.calculateDepreciationDate(purchaseDateString, shelfLife);
+
+        assertEquals(expectedDepreciationDate, actualDepreciationDate);
+    }
+    @Test
+    public void calculateDepreciationDate_DoesNotThrowException_WhenPurchaseDateStringIsValid() throws Exception {
+        int shelfLife = 5;
+
+        String depreciationDate = AssetService.calculateDepreciationDate(null, shelfLife);
+        assertEquals("Invalid purchase date string", depreciationDate);
     }
 
 

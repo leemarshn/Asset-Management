@@ -11,7 +11,9 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,15 +30,25 @@ public class AssetService {
         return asset;
     }
 
-    public String calculateDepreciationDate(String purchaseDate, int shelfLife) {
-        LocalDate date = LocalDate.parse(purchaseDate);
-        LocalDate depreciationDate = date.plusYears(shelfLife);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d'th' yyyy");
+    public static String calculateDepreciationDate(Date purchaseDateString, int shelfLife) {
+        try {
+            Calendar depreciationCalendar = Calendar.getInstance();
+            depreciationCalendar.setTime(purchaseDateString);
+            depreciationCalendar.add(Calendar.YEAR, shelfLife);
+            depreciationCalendar.set(Calendar.DAY_OF_MONTH, depreciationCalendar.get(Calendar.DAY_OF_MONTH));
 
-        return depreciationDate.format(formatter);
+            Locale locale = Locale.getDefault();
+            String depreciationMonth = depreciationCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, locale);
+            String depreciationYear = String.valueOf(depreciationCalendar.get(Calendar.YEAR));
+
+            return depreciationMonth + ", " + depreciationYear;
+        } catch (Exception e) {
+            return "Invalid purchase date string";
+        }
     }
 
-    public String currencyFormat(double num) {
+
+public String currencyFormat(double num) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
         return decimalFormat.format(num);
     }
@@ -44,7 +56,6 @@ public class AssetService {
 
     public List<AssetDTO> getAllAssets() {
         List<Asset> assets = assetRepository.findAll();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         return assets.stream()
                 .map(asset -> {
@@ -52,7 +63,11 @@ public class AssetService {
                     int shelfLife = asset.getShelfLife();
                     String depreciationDate = null;
                     if (purchaseDate != null) {
-                        depreciationDate = calculateDepreciationDate(dateFormat.format(purchaseDate), shelfLife);
+                        try {
+                            depreciationDate = calculateDepreciationDate(purchaseDate, shelfLife);
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                     return new AssetDTO(asset.getId(), asset.getName(), asset.getUser(), currencyFormat(asset.getValue()), depreciationDate);
                 })
