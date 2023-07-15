@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -47,13 +44,10 @@ public class AssetService {
         }
     }
 
-
-public String currencyFormat(double num) {
+    public String currencyFormat(double num) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
         return decimalFormat.format(num);
     }
-
-
     public List<AssetDTO> getAllAssets() {
         List<Asset> assets = assetRepository.findAll();
 
@@ -73,12 +67,7 @@ public String currencyFormat(double num) {
                 })
                 .collect(Collectors.toList());
     }
-
     public Asset getAssetById(Long id) {
         return assetRepository.findById(id).orElse(null);
     }
-
-
-
-
 }

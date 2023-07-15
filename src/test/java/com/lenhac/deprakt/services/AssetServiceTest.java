@@ -21,6 +21,7 @@ class AssetServiceTest {
     @Mock
     private AssetRepo assetRepo;
     private AssetService assetService;
+
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
@@ -69,6 +70,7 @@ class AssetServiceTest {
         assertEquals(localDate, sqlPurchaseDate.toLocalDate());
         assertEquals("Sample Notes", savedAsset.getNotes());
     }
+
     @Test
     public void calculateDepreciationDate_ReturnsDepreciationDate() throws Exception {
         Date purchaseDateString = Date.valueOf("2023-02-11");
@@ -79,6 +81,7 @@ class AssetServiceTest {
 
         assertEquals(expectedDepreciationDate, actualDepreciationDate);
     }
+
     @Test
     public void calculateDepreciationDate_DoesNotThrowException_WhenPurchaseDateStringIsValid() throws Exception {
         int shelfLife = 5;
@@ -86,7 +89,4 @@ class AssetServiceTest {
         String depreciationDate = AssetService.calculateDepreciationDate(null, shelfLife);
         assertEquals("Invalid purchase date string", depreciationDate);
     }
-
-
-
 }

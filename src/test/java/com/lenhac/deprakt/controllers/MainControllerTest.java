@@ -1,29 +1,22 @@
 package com.lenhac.deprakt.controllers;
 
-import com.lenhac.deprakt.dto.AssetDTO;
 import com.lenhac.deprakt.models.Asset;
 import com.lenhac.deprakt.repositories.AssetRepo;
 import com.lenhac.deprakt.services.AssetService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.ui.Model;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -35,21 +28,12 @@ public class MainControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
     private AssetRepo assetRepo;
-
     @MockBean
     private AssetService assetService;
-
-
-    @InjectMocks
-    private MainController mainController;
-
-
     @Test
     public void testCreateAsset() throws Exception {
-        // Mock the saved asset
         Asset savedAsset = new Asset();
         savedAsset.setId(1L);
         savedAsset.setName("Asset Name");
@@ -83,7 +67,6 @@ public class MainControllerTest {
 
         verify(assetService, times(1)).saveAsset(any(Asset.class));
     }
-
     @Test
     public void testCreateAsset_Failure() throws Exception {
         when(assetService.saveAsset(any(Asset.class))).thenReturn(null);
@@ -106,7 +89,6 @@ public class MainControllerTest {
 
         verify(assetService, times(1)).saveAsset(any(Asset.class));
     }
-
     @Test
     public void deleteAsset_ShouldDeleteExistingAssetAndSetFlashMessage() throws Exception {
         Long assetId = 123L;
