@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <title>Welcome to Asset Management</title>
+    <!-- Add any additional CSS or JavaScript files -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/scripts/scripts.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/bootstrap :: bootstrap}"></div>
+<div th:insert="~{fragments/menu :: menu}"></div>
+<main class="container mt-5">
+
+    <div class="row">
+        <div th:if="${message}" class="alert alert-success">
+            <p th:text="${message}"></p>
+        </div>
+
+        <div th:if="${error}" class="alert alert-danger">
+            <p th:text="${error}"></p>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-8 welcome-text" style="color: #334B5C;">Asset Register</h1>
+        </div>
+        <div class="col-md-6 text-right">
+            <a class="btn btn-md button-bg" href="/new">
+                <i class="fas fa-plus"></i> Add
+            </a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="mt-5">Entity Form</h2>
+
+                <form id="entityForm" th:action="@{/save-entity}" th:object="${entity}" method="post">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" th:field="*{name}" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <input type="text" class="form-control" id="description" th:field="*{description}" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="resource">Resource:</label>
+                        <input type="text" class="form-control" id="resource" th:field="*{resource}" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="action">Action:</label>
+                        <input type="text" class="form-control" id="action" th:field="*{action}" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status:</label>
+                        <input type="text" class="form-control" id="status" th:field="*{status}" required/>
+                    </div>
+
+                    <!-- Since created and modified are managed by the backend, no need to display them in the form -->
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</html>

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -23,7 +25,10 @@ public class PermissionEntity {
     private String resource;
     private String action;
     private String status;
+    @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime created;
+    @UpdateTimestamp
     private LocalDateTime modified;
 
     @Builder
