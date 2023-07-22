@@ -1,6 +1,6 @@
 package com.lenhac.deprakt.services;
 
-import com.lenhac.deprakt.models.Asset;
+import com.lenhac.deprakt.models.AssetV1;
 import com.lenhac.deprakt.repositories.AssetRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-class AssetServiceTest {
+class AssetV1ServiceTest {
 
     @Mock
     private AssetRepo assetRepo;
@@ -35,40 +35,40 @@ class AssetServiceTest {
         LocalDate localDate = LocalDate.parse(purchaseDate, formatter);
         java.sql.Date sqlPurchaseDate = java.sql.Date.valueOf(localDate);
 
-        Asset asset = new Asset();
-        asset.setName("Sample Asset");
-        asset.setType("Sample Type");
-        asset.setUser("Sample User");
-        asset.setSupplier("Sample Supplier");
-        asset.setModel("Sample Model");
-        asset.setMake("Sample Make");
-        asset.setShelfLife(5);
-        asset.setValue(1000.0);
-        asset.setPurchaseDate(sqlPurchaseDate);
-        asset.setNotes("Sample Notes");
+        AssetV1 assetV1 = new AssetV1();
+        assetV1.setName("Sample Asset");
+        assetV1.setType("Sample Type");
+        assetV1.setUser("Sample User");
+        assetV1.setSupplier("Sample Supplier");
+        assetV1.setModel("Sample Model");
+        assetV1.setMake("Sample Make");
+        assetV1.setShelfLife(5);
+        assetV1.setValue(1000.0);
+        assetV1.setPurchaseDate(sqlPurchaseDate);
+        assetV1.setNotes("Sample Notes");
 
         AssetRepo assetRepo = Mockito.mock(AssetRepo.class);
-        Asset savedAsset = new Asset();
+        AssetV1 savedAssetV1 = new AssetV1();
 //        savedAsset.setId(1L);
-        when(assetRepo.save(asset)).thenReturn(savedAsset);
+        when(assetRepo.save(assetV1)).thenReturn(savedAssetV1);
 
         AssetService assetService = new AssetService(assetRepo);
-        savedAsset = assetService.saveAsset(asset);
+        savedAssetV1 = assetService.saveAsset(assetV1);
 
 
-        Mockito.verify(assetRepo, Mockito.times(1)).save(asset);
+        Mockito.verify(assetRepo, Mockito.times(1)).save(assetV1);
 
-        assertEquals("Sample Asset", savedAsset.getName());
-        assertEquals("Sample Type", savedAsset.getType());
-        assertEquals("Sample User", savedAsset.getUser());
-        assertEquals("Sample Supplier", savedAsset.getSupplier());
-        assertEquals("Sample Model", savedAsset.getModel());
-        assertEquals("Sample Make", savedAsset.getMake());
-        assertEquals(5, savedAsset.getShelfLife());
-        assertEquals(1000.0, savedAsset.getValue());
+        assertEquals("Sample Asset", savedAssetV1.getName());
+        assertEquals("Sample Type", savedAssetV1.getType());
+        assertEquals("Sample User", savedAssetV1.getUser());
+        assertEquals("Sample Supplier", savedAssetV1.getSupplier());
+        assertEquals("Sample Model", savedAssetV1.getModel());
+        assertEquals("Sample Make", savedAssetV1.getMake());
+        assertEquals(5, savedAssetV1.getShelfLife());
+        assertEquals(1000.0, savedAssetV1.getValue());
         // Assert that the savedAsset has the correct date
         assertEquals(localDate, sqlPurchaseDate.toLocalDate());
-        assertEquals("Sample Notes", savedAsset.getNotes());
+        assertEquals("Sample Notes", savedAssetV1.getNotes());
     }
 
     @Test

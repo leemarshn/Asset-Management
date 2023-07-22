@@ -1,6 +1,6 @@
 package com.lenhac.deprakt.controllers;
 
-import com.lenhac.deprakt.models.Asset;
+import com.lenhac.deprakt.models.AssetV1;
 import com.lenhac.deprakt.repositories.AssetRepo;
 import com.lenhac.deprakt.services.AssetService;
 import org.junit.jupiter.api.Test;
@@ -34,20 +34,20 @@ public class MainControllerTest {
     private AssetService assetService;
     @Test
     public void testCreateAsset() throws Exception {
-        Asset savedAsset = new Asset();
-        savedAsset.setId(1L);
-        savedAsset.setName("Asset Name");
-        savedAsset.setType("computer");
-        savedAsset.setUser("John Doe");
-        savedAsset.setSupplier("Supplier Name");
-        savedAsset.setModel("Asset Model");
-        savedAsset.setMake("Asset Make");
-        savedAsset.setShelfLife(5);
-        savedAsset.setValue(1000.0);
-        savedAsset.setPurchaseDate(java.sql.Date.valueOf("2023-12-12"));
-        savedAsset.setNotes("Asset Notes");
+        AssetV1 savedAssetV1 = new AssetV1();
+        savedAssetV1.setId(1L);
+        savedAssetV1.setName("Asset Name");
+        savedAssetV1.setType("computer");
+        savedAssetV1.setUser("John Doe");
+        savedAssetV1.setSupplier("Supplier Name");
+        savedAssetV1.setModel("Asset Model");
+        savedAssetV1.setMake("Asset Make");
+        savedAssetV1.setShelfLife(5);
+        savedAssetV1.setValue(1000.0);
+        savedAssetV1.setPurchaseDate(java.sql.Date.valueOf("2023-12-12"));
+        savedAssetV1.setNotes("Asset Notes");
 
-        when(assetService.saveAsset(any(Asset.class))).thenReturn(savedAsset);
+        when(assetService.saveAsset(any(AssetV1.class))).thenReturn(savedAssetV1);
 
         mockMvc.perform(post("/assets")
                         .param("name", "Asset Name")
@@ -65,11 +65,11 @@ public class MainControllerTest {
                 .andExpect(flash().attributeExists("message"))
                 .andExpect(flash().attribute("message", "Asset created successfully"));
 
-        verify(assetService, times(1)).saveAsset(any(Asset.class));
+        verify(assetService, times(1)).saveAsset(any(AssetV1.class));
     }
     @Test
     public void testCreateAsset_Failure() throws Exception {
-        when(assetService.saveAsset(any(Asset.class))).thenReturn(null);
+        when(assetService.saveAsset(any(AssetV1.class))).thenReturn(null);
 
         mockMvc.perform(post("/assets")
                         .param("name", "Asset Name")
@@ -87,7 +87,7 @@ public class MainControllerTest {
                 .andExpect(flash().attributeExists("error"))
                 .andExpect(flash().attribute("error", "Failed to create asset"));
 
-        verify(assetService, times(1)).saveAsset(any(Asset.class));
+        verify(assetService, times(1)).saveAsset(any(AssetV1.class));
     }
     @Test
     public void deleteAsset_ShouldDeleteExistingAssetAndSetFlashMessage() throws Exception {
@@ -115,35 +115,35 @@ public class MainControllerTest {
     }
     @Test
     public void testEditAsset() throws Exception {
-        Asset existingAsset = new Asset();
-        existingAsset.setId(1L);
-        existingAsset.setName("Existing Asset");
-        existingAsset.setType("computer");
-        existingAsset.setUser("John Doe");
-        existingAsset.setSupplier("Supplier Name");
-        existingAsset.setModel("Asset Model");
-        existingAsset.setMake("Asset Make");
-        existingAsset.setShelfLife(5);
-        existingAsset.setValue(1000.0);
-        existingAsset.setPurchaseDate(java.sql.Date.valueOf("2023-12-12"));
-        existingAsset.setNotes("Asset Notes");
+        AssetV1 existingAssetV1 = new AssetV1();
+        existingAssetV1.setId(1L);
+        existingAssetV1.setName("Existing Asset");
+        existingAssetV1.setType("computer");
+        existingAssetV1.setUser("John Doe");
+        existingAssetV1.setSupplier("Supplier Name");
+        existingAssetV1.setModel("Asset Model");
+        existingAssetV1.setMake("Asset Make");
+        existingAssetV1.setShelfLife(5);
+        existingAssetV1.setValue(1000.0);
+        existingAssetV1.setPurchaseDate(java.sql.Date.valueOf("2023-12-12"));
+        existingAssetV1.setNotes("Asset Notes");
 
-        when(assetService.getAssetById(1L)).thenReturn(existingAsset);
+        when(assetService.getAssetById(1L)).thenReturn(existingAssetV1);
 
-        Asset savedAsset = new Asset();
-        savedAsset.setId(1L);
-        savedAsset.setName("Updated Asset Name");
-        savedAsset.setType("computer");
-        savedAsset.setUser("John Doe");
-        savedAsset.setSupplier("Supplier Name");
-        savedAsset.setModel("Asset Model");
-        savedAsset.setMake("Asset Make");
-        savedAsset.setShelfLife(5);
-        savedAsset.setValue(1000.0);
-        savedAsset.setPurchaseDate(java.sql.Date.valueOf("2023-12-12"));
-        savedAsset.setNotes("Asset Notes");
+        AssetV1 savedAssetV1 = new AssetV1();
+        savedAssetV1.setId(1L);
+        savedAssetV1.setName("Updated Asset Name");
+        savedAssetV1.setType("computer");
+        savedAssetV1.setUser("John Doe");
+        savedAssetV1.setSupplier("Supplier Name");
+        savedAssetV1.setModel("Asset Model");
+        savedAssetV1.setMake("Asset Make");
+        savedAssetV1.setShelfLife(5);
+        savedAssetV1.setValue(1000.0);
+        savedAssetV1.setPurchaseDate(java.sql.Date.valueOf("2023-12-12"));
+        savedAssetV1.setNotes("Asset Notes");
 
-        when(assetService.saveAsset(any(Asset.class))).thenReturn(savedAsset);
+        when(assetService.saveAsset(any(AssetV1.class))).thenReturn(savedAssetV1);
 
         mockMvc.perform(post("/assets/1")
                         .param("name", "Updated Asset Name")
@@ -163,7 +163,7 @@ public class MainControllerTest {
 
         verify(assetService, times(1)).getAssetById(1L);
 
-        verify(assetService, times(1)).saveAsset(any(Asset.class));
+        verify(assetService, times(1)).saveAsset(any(AssetV1.class));
     }
     @Test
     public void testShowEditPage_AssetNotFound() throws Exception {
@@ -179,22 +179,22 @@ public class MainControllerTest {
     }
     @Test
     public void testEditAsset_UpdateFailed() throws Exception {
-        Asset existingAsset = new Asset();
-        existingAsset.setId(1L);
-        existingAsset.setName("Existing Asset");
-        existingAsset.setType("computer");
-        existingAsset.setUser("John Doe");
-        existingAsset.setSupplier("Supplier Name");
-        existingAsset.setModel("Asset Model");
-        existingAsset.setMake("Asset Make");
-        existingAsset.setShelfLife(5);
-        existingAsset.setValue(1000.0);
-        existingAsset.setPurchaseDate(java.sql.Date.valueOf("2023-12-12"));
-        existingAsset.setNotes("Asset Notes");
+        AssetV1 existingAssetV1 = new AssetV1();
+        existingAssetV1.setId(1L);
+        existingAssetV1.setName("Existing Asset");
+        existingAssetV1.setType("computer");
+        existingAssetV1.setUser("John Doe");
+        existingAssetV1.setSupplier("Supplier Name");
+        existingAssetV1.setModel("Asset Model");
+        existingAssetV1.setMake("Asset Make");
+        existingAssetV1.setShelfLife(5);
+        existingAssetV1.setValue(1000.0);
+        existingAssetV1.setPurchaseDate(java.sql.Date.valueOf("2023-12-12"));
+        existingAssetV1.setNotes("Asset Notes");
 
-        when(assetService.getAssetById(1L)).thenReturn(existingAsset);
+        when(assetService.getAssetById(1L)).thenReturn(existingAssetV1);
 
-        when(assetService.saveAsset(any(Asset.class))).thenReturn(null);
+        when(assetService.saveAsset(any(AssetV1.class))).thenReturn(null);
 
         mockMvc.perform(post("/assets/1")
                         .param("name", "Updated Asset Name")
@@ -214,25 +214,25 @@ public class MainControllerTest {
 
         verify(assetService, times(1)).getAssetById(1L);
 
-        verify(assetService, times(1)).saveAsset(any(Asset.class));
+        verify(assetService, times(1)).saveAsset(any(AssetV1.class));
     }
 
     @Test
     public void testShowAssetDetails() throws Exception {
-        Asset asset = new Asset();
-        asset.setId(1L);
-        asset.setName("Asset 1");
-        asset.setUser("John Doe");
-        asset.setValue(1000.0);
-        asset.setPurchaseDate(Date.valueOf("2023-01-01"));
+        AssetV1 assetV1 = new AssetV1();
+        assetV1.setId(1L);
+        assetV1.setName("Asset 1");
+        assetV1.setUser("John Doe");
+        assetV1.setValue(1000.0);
+        assetV1.setPurchaseDate(Date.valueOf("2023-01-01"));
 
-        when(assetService.getAssetById(1L)).thenReturn(asset);
+        when(assetService.getAssetById(1L)).thenReturn(assetV1);
 
         mockMvc.perform(get("/assets-view/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(view().name("asset-details"))
                 .andExpect(model().attributeExists("asset"))
-                .andExpect(model().attribute("asset", asset))
+                .andExpect(model().attribute("asset", assetV1))
                 .andExpect(flash().attributeCount(0));
 
         verify(assetService, times(1)).getAssetById(1L);
@@ -259,7 +259,7 @@ public class MainControllerTest {
                 .andExpect(model().attributeExists("asset"))
                 .andExpect(result -> {
                     Object asset = Objects.requireNonNull(result.getModelAndView()).getModel().get("asset");
-                    assertTrue(asset instanceof Asset);
+                    assertTrue(asset instanceof AssetV1);
                 });
     }
 

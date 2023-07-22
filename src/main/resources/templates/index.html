@@ -62,14 +62,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="asset : ${assets}">
-            <td><a th:href="@{/assets-view/{id}(id=${asset.id})}" th:text="${asset.name}"></a></td>
-            <td th:text="${asset.user}"></td>
-            <td th:text="${asset.depreciationDate}"></td>
-            <td th:text="${asset.value}"></td>
+        <tr th:each="assetV1 : ${assetV1s}">
+            <td><a th:href="@{/assetV1s-view/{id}(id=${assetV1.id})}" th:text="${assetV1.name}"></a></td>
+            <td th:text="${assetV1.user}"></td>
+            <td th:text="${assetV1.depreciationDate}"></td>
+            <td th:text="${assetV1.value}"></td>
             <td>
-                <a th:href="@{'/' + ${asset.id}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                <button class="btn btn-sm btn-danger" th:data-id="${asset.id}" onclick="del(this.getAttribute('data-id'))" type="button">Delete</button>
+                <a th:href="@{'/' + ${assetV1.id}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                <button class="btn btn-sm btn-danger" th:data-id="${assetV1.id}" onclick="del(this.getAttribute('data-id'))" type="button">Delete</button>
             </td>
         </tr>
         <!-- Add more rows as needed -->

@@ -14,7 +14,7 @@ import java.sql.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Asset {
+public class AssetV1 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

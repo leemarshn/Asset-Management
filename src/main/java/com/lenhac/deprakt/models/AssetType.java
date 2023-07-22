@@ -1,2 +1,4 @@
-package com.lenhac.deprakt.models;public enum AssetType {
+package com.lenhac.deprakt.models;
+
+public enum AssetType {
 }

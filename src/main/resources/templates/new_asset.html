@@ -10,9 +10,9 @@
 <div th:insert="~{fragments/bootstrap :: bootstrap}"></div>
 <div th:insert="~{fragments/menu :: menu}"></div>
 <main class="container mt-5">
-  <h5 style="color: red">Enter the details of your asset</h5>
+  <h5 style="color: red">Enter the details of your assetV1</h5>
 
-  <form class="border p-4 bg-light" th:action="@{/assets}" method="post" th:object="${asset}">
+  <form class="border p-4 bg-light" th:action="@{/assetV1s}" method="post" th:object="${assetV1}">
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="name">Name:</label>

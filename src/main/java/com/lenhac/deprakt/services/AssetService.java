@@ -1,7 +1,7 @@
 package com.lenhac.deprakt.services;
 
 import com.lenhac.deprakt.dto.AssetDTO;
-import com.lenhac.deprakt.models.Asset;
+import com.lenhac.deprakt.models.AssetV1;
 import com.lenhac.deprakt.repositories.AssetRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +22,9 @@ public class AssetService {
         this.assetRepository = assetRepository;
     }
 
-    public Asset saveAsset(Asset asset) {
-        assetRepository.save(asset);
-        return asset;
+    public AssetV1 saveAsset(AssetV1 assetV1) {
+        assetRepository.save(assetV1);
+        return assetV1;
     }
 
     public static String calculateDepreciationDate(Date purchaseDateString, int shelfLife) {
@@ -49,9 +49,9 @@ public class AssetService {
         return decimalFormat.format(num);
     }
     public List<AssetDTO> getAllAssets() {
-        List<Asset> assets = assetRepository.findAll();
+        List<AssetV1> assetV1s = assetRepository.findAll();
 
-        return assets.stream()
+        return assetV1s.stream()
                 .map(asset -> {
                     Date purchaseDate = asset.getPurchaseDate();
                     int shelfLife = asset.getShelfLife();
@@ -67,7 +67,7 @@ public class AssetService {
                 })
                 .collect(Collectors.toList());
     }
-    public Asset getAssetById(Long id) {
+    public AssetV1 getAssetById(Long id) {
         return assetRepository.findById(id).orElse(null);
     }
 }

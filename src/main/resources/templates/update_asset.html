@@ -11,8 +11,8 @@
 <main class="container mt-5">
   <h5 style="color: red">Edit Asset</h5>
 
-  <form class="border p-4 bg-light" th:action="@{/assets/{id}(id=${asset.id})}" th:object="${asset}" method="post">
-    <!-- Include the asset ID as a hidden field -->
+  <form class="border p-4 bg-light" th:action="@{/assetV1s/{id}(id=${assetV1.id})}" th:object="${assetV1}" method="post">
+    <!-- Include the assetV1 ID as a hidden field -->
     <input type="hidden" th:field="*{id}">
     <div class="form-row">
       <div class="form-group col-md-6">
