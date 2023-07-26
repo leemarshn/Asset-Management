@@ -1,4 +1,4 @@
-package com.lenhac.deprakt.security;
+package com.lenhac.deprakt.config;
 
 public class SecurityConfig {
 }

@@ -25,9 +25,9 @@ public class Employee extends BaseEntity {
     @JoinColumn(name = "person_id", nullable = false, unique = true)
     private Person person;
 
-    @ManyToOne // Many-to-one relationship with Role
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
+    @OneToOne
+    @JoinColumn(name = "credentials_id")
+    private Credentials credentials;
 
     @ManyToMany
     @JoinTable(

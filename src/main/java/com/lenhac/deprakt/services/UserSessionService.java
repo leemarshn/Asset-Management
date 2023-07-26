@@ -6,6 +6,7 @@ import com.lenhac.deprakt.repositories.UserSessionInfoRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
@@ -15,9 +16,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserSessionService {
 
-    @Autowired
-    private UserSessionInfoRepository userSessionInfoRepository;
+    private final UserSessionInfoRepository userSessionInfoRepository;
 
+    @Autowired
+    public UserSessionService(UserSessionInfoRepository userSessionInfoRepository) {
+        this.userSessionInfoRepository = userSessionInfoRepository;
+    }
 
     public UserSessionInfo storeSession(HttpServletRequest request) {
         try {
@@ -28,7 +32,15 @@ public class UserSessionService {
                 WebAuthenticationDetails authDetails = (WebAuthenticationDetails) authentication.getDetails();
 
                 String username = userDetails.getUsername();
-                String roleName = userDetails.getAuthorities().iterator().next().getAuthority();
+                String roleName = null;
+
+                // Find the role authority (it starts with "ROLE_")
+                for (GrantedAuthority authority : userDetails.getAuthorities()) {
+                    if (authority.getAuthority().startsWith("ROLE_")) {
+                        roleName = authority.getAuthority().substring("ROLE_".length());
+                        break;
+                    }
+                }
 
                 session.setSessionId(authDetails.getSessionId());
                 session.setIpAddress(authDetails.getRemoteAddress());
@@ -49,6 +61,5 @@ public class UserSessionService {
         }
 
     }
-
 }
 

@@ -1,4 +1,4 @@
-package com.lenhac.deprakt.security;
+package com.lenhac.deprakt.services;
 
 import com.lenhac.deprakt.models.Credentials;
 import com.lenhac.deprakt.models.Role;

@@ -1,9 +1,7 @@
 package com.lenhac.deprakt.models;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,7 +11,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "permissions")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Permission extends BaseEntity {
 
