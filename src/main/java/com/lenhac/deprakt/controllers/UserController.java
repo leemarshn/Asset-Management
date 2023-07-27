@@ -38,7 +38,20 @@ public class UserController {
         return modelAndView;
     }
 
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login"; // Assuming "login" is the name of your login page Thymeleaf template
+    }
 
+    @GetMapping("/register")
+    public String registerPage() {
+        return "register"; // Assuming "register" is the name of your register page Thymeleaf template
+    }
+
+    @GetMapping("/about")
+    public String aboutPage() {
+        return "about"; // Assuming "about" is the name of your about page Thymeleaf template
+    }
 
 }
 
