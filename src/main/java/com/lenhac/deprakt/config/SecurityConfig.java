@@ -17,48 +17,16 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final CustomUserDetailsService userDetailsService;
-    private final PasswordEncoder passwordEncoder;
 
-    public SecurityConfig(CustomUserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
-        this.userDetailsService = userDetailsService;
-        this.passwordEncoder = passwordEncoder;
-    }
 
-//    @Bean
-//    public WebSecurityConfigurer webSecurityConfigurer() {
-//        return new WebSecurityConfigurer() {
-//            @Override
-//            public void configure(WebSecurity web) {
-//                web.ignoring().antMatchers("/css/**", "/js/**", "/images/**", "/fragments/**");
-//            }
-//        };
-//    }
-/**
- *        @Bean
- *    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
- * 		http
- * 			.securityMatcher(antMatcher("/api/**"))
- * 			.authorizeHttpRequests(authorize -> authorize
- * 				.requestMatchers(antMatcher("/user/**")).hasRole("USER")
- * 				.requestMatchers(regexMatcher("/admin/.*")).hasRole("ADMIN")
- * 				.requestMatchers(new MyCustomRequestMatcher()).hasRole("SUPERVISOR")
- * 				.anyRequest().authenticated()
- * 			)
- * 			.formLogin(withDefaults());
- * 		return http.build();
- *    }
- *
- *
- * */
 @Bean
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
             .csrf(AbstractHttpConfigurer::disable) // Disable CSRF protection
-            .authorizeRequests(authorizeRequests -> authorizeRequests
-                    .requestMatchers(antMatcher("/login")).permitAll()
-                    .requestMatchers(antMatcher("/dashboard")).hasAnyRole()
-                    .requestMatchers(antMatcher("/admin/**")).hasRole("ADMIN")
+            .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                    .requestMatchers("/login").permitAll()
+                    .requestMatchers("/dashboard").hasAnyRole()
+                    .requestMatchers("/admin/**").hasRole("ADMIN")
                     .requestMatchers("/services/**", "/department/**", "/profile/**").hasAnyRole()
                     .requestMatchers("/css/**", "/js/**", "/images/**", "/include").permitAll()
                     .requestMatchers("/about", "/register").permitAll()

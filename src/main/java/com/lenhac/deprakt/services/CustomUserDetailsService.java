@@ -46,7 +46,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + credentialsRepository.findRoleNameByUsername(username)));
 
-        // Adding the user's permissions associated with the role
         List<String> permissionNames = rolesRepository.findPermissionNamesByRoleId(role.getRoleId());
         for (String permissionName : permissionNames) {
             authorities.add(new SimpleGrantedAuthority(permissionName));

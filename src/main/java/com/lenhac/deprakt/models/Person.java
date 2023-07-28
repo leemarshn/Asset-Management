@@ -21,7 +21,7 @@ public class Person extends BaseEntity{
     private String personId = UUID.randomUUID().toString();
 
     @Column(nullable = false)
-    private String firstName;
+    private String surname;
 
     @Column(nullable = false)
     private String lastName;
