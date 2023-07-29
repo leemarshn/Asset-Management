@@ -7,9 +7,12 @@
     <!-- Add Google Fonts for Molengo and Lekton -->
     <link href="https://fonts.googleapis.com/css2?family=Molengo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lekton&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         body {
-            background-color: darkblue;
+            background-color: #334b5c;
             color: white;
             display: flex;
             justify-content: center;
@@ -25,63 +28,60 @@
             text-align: center;
             font-size: 70px; /* Increased the h1 font size */
             font-family: 'Molengo', sans-serif; /* Use Molengo font */
-            /*text-transform: capitalize; !* Convert the welcome message to camel case *!*/
             margin-bottom: 10px; /* Reduced the margin between the message and the form */
             padding: 20px; /* Add some padding to the .jumbotron div */
         }
-        .form-container {
-            padding: 20px;
-            flex: 1; /* Expand to take up all available space */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+
         .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 40px;
         }
         .btn-primary {
-            background-color: #ffc107;
-            border-color: #ffc107;
+            background-color: #e84444; /* Changed to the specific shade of red */
+            border-color: #e84444; /* Changed to the specific shade of red */
         }
         .btn-primary:hover {
-            background-color: #ffcd38;
-            border-color: #ffcd38;
+            background-color: #334b5c;
+            border-color: #ffffff;
         }
         p {
             font-size: 18px; /* Reduced the p font size */
             line-height: 1em; /* Set line spacing to 1em */
         }
-        .small-text {
-            font-size: 14px; /* Set font size to 10px */
+        .logo {
+            max-width: 300px; /* Adjust the logo's max width as needed */
+            margin-bottom: 20px; /* Add margin to separate from footer */
         }
-        .small-text-container {
-            margin-top: 20px; /* Add a margin top of 20px to the container */
+        .footer {
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
     </style>
 </head>
 <body>
 <div class="container container-60">
     <div class="jumbotron">
         <h1>An Enterprise Resource Planning System, Custom Made for Kenyan Needs</h1>
-        <p>Where managing your organization is a breeze!</p>
+        <p>Bringing light to your business</p>
     </div>
     <div class=" col-md-12"> <!-- Adjusted to approximately 4 columns -->
         <form>
             <div class="form-group input-group"> <!-- Added input-group wrapper -->
                 <input type="text" class="form-control" id="organizationName" placeholder="Your Organization's Name">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" onclick="submitOrganizationName()">Continue</button>
+                    <button class="btn btn-primary" type="button" onclick="submitOrganizationName()">
+                        Continue <i class="fas fa-arrow-right"></i> <!-- Font Awesome arrow icon -->
+                    </button>
                 </div>
             </div>
         </form>
     </div>
-    <div class="small-text-container"> <!-- Add a container div with the margin top -->
-        <p class="small-text">By, Lenhac Limited</p>
+
+    <div class="footer"> <!-- Footer div with logo centered -->
+        <img class="logo" src="/deprakt/src/main/resources/static/images/lenhac-logo-reverse-white.png" width="140" alt="Lenhac Logo">
     </div>
+
 </div>
 
 <!-- Add Bootstrap JS and jQuery links for optional functionality -->
