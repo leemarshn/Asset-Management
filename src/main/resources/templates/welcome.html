@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Lenhac Kenya's #1 ERP System</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add Google Fonts for Molengo and Lekton -->
+    <link href="https://fonts.googleapis.com/css2?family=Molengo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lekton&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: darkblue;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container-60 {
+            max-width: 60%; /* Set maximum width to 60% */
+        }
+        .jumbotron {
+            background-color: transparent;
+            text-align: center;
+            font-size: 70px; /* Increased the h1 font size */
+            font-family: 'Molengo', sans-serif; /* Use Molengo font */
+            /*text-transform: capitalize; !* Convert the welcome message to camel case *!*/
+            margin-bottom: 10px; /* Reduced the margin between the message and the form */
+            padding: 20px; /* Add some padding to the .jumbotron div */
+        }
+        .form-container {
+            padding: 20px;
+            flex: 1; /* Expand to take up all available space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .btn-primary {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+        .btn-primary:hover {
+            background-color: #ffcd38;
+            border-color: #ffcd38;
+        }
+        p {
+            font-size: 18px; /* Reduced the p font size */
+            line-height: 1em; /* Set line spacing to 1em */
+        }
+        .small-text {
+            font-size: 14px; /* Set font size to 10px */
+        }
+        .small-text-container {
+            margin-top: 20px; /* Add a margin top of 20px to the container */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container container-60">
+    <div class="jumbotron">
+        <h1>An Enterprise Resource Planning System, Custom Made for Kenyan Needs</h1>
+        <p>Where managing your organization is a breeze!</p>
+    </div>
+    <div class=" col-md-12"> <!-- Adjusted to approximately 4 columns -->
+        <form>
+            <div class="form-group input-group"> <!-- Added input-group wrapper -->
+                <input type="text" class="form-control" id="organizationName" placeholder="Your Organization's Name">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" onclick="submitOrganizationName()">Continue</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="small-text-container"> <!-- Add a container div with the margin top -->
+        <p class="small-text">By, Lenhac Limited</p>
+    </div>
+</div>
+
+<!-- Add Bootstrap JS and jQuery links for optional functionality -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function submitOrganizationName() {
+        var organizationName = document.getElementById("organizationName").value;
+        if (organizationName.trim() === "") {
+            alert("Please enter your organization's name.");
+        } else {
+            alert("Welcome to Lenhac Kenya's #1 ERP System, " + organizationName + "!");
+        }
+    }
+</script>
+</body>
+</html>
