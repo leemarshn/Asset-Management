@@ -2,9 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Registration</title>
+  <!-- Bootstrap CSS link -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-$END$
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">User Registration</h4>
+        </div>
+        <div class="card-body">
+          <form id="registrationForm">
+            <!-- Section 1: Personal Information -->
+            <div class="form-group">
+              <label for="surname">Surname:</label>
+              <input type="text" class="form-control" id="surname" placeholder="Enter your surname">
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name:</label>
+              <input type="text" class="form-control" id="lastName" placeholder="Enter your last name">
+            </div>
+            <button type="button" class="btn btn-primary btn-block" onclick="nextSection(2)">Next</button>
+
+            <!-- Section 2: Contact Details -->
+            <div class="section" id="section2" style="display: none;">
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="nextSection(3)">Next</button>
+            </div>
+
+            <!-- Section 3: Role -->
+            <div class="section" id="section3" style="display: none;">
+              <div class="form-group">
+                <label for="role">Role:</label>
+                <input type="text" class="form-control" id="role" placeholder="Enter your role">
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="nextSection(4)">Next</button>
+            </div>
+
+            <!-- Section 4: Credentials -->
+            <div class="section" id="section4" style="display: none;">
+              <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter your username">
+              </div>
+              <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter your password">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and jQuery links for optional functionality -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+  function nextSection(nextSectionNumber) {
+    // Hide the current section
+    var currentSection = document.querySelector('.section:not([style*="display: none"])');
+    if (currentSection) {
+      currentSection.style.display = "none";
+    }
+
+    // Show the next section
+    var nextSection = document.getElementById('section' + nextSectionNumber);
+    if (nextSection) {
+      nextSection.style.display = "block";
+    }
+  }
+</script>
 </body>
 </html>
