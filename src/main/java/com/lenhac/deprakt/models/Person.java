@@ -6,25 +6,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.UUID;
+//@Entity
+//@Getter
+//@Setter
+//@AllArgsConstructor
+public class Person extends BaseEntity {
 
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+//    @Id
+//    @Column(name = "person_id", updatable = false, nullable = false, unique = true, length = 36)
+//    private String personId; // Don't use @GeneratedValue for UUID
+//
+//    @Column(nullable = false)
+//    private String surname;
+//
+//    @Column(nullable = false)
+//    private String lastName;
+//
+//    public Person() {
+//        this.personId = UUID.randomUUID().toString();
+//    }
 
-public class Person extends BaseEntity{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "person_id", updatable = false, nullable = false, unique = true, length = 36)
-    private String personId = UUID.randomUUID().toString();
-
-    @Column(nullable = false)
-    private String surname;
-
-    @Column(nullable = false)
-    private String lastName;
-
-
+    // Constructors, getters, and setters
 }

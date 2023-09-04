@@ -3,16 +3,16 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@MappedSuperclass
-@Getter
-@Setter
+//@MappedSuperclass
+//@Getter
+//@Setter
 public abstract class BaseEntity {
 
 
-    @Column(name = "status", nullable = false)
-    private String status;
-
-    public BaseEntity() {
-        status = "ACTIVE";
-    }
+//    @Column(name = "status", nullable = false)
+//    private String status;
+//
+//    public BaseEntity() {
+//        status = "ACTIVE";
+//    }
 }

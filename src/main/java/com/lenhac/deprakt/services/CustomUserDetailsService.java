@@ -17,43 +17,43 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class CustomUserDetailsService implements UserDetailsService {
-
-    private final CredentialsRepository credentialsRepository;
-    private final RolesRepository rolesRepository;
-    private final PasswordEncoder passwordEncoder; // Inject the password encoder
-
-    @Autowired
-    public CustomUserDetailsService(CredentialsRepository credentialsRepository, RolesRepository rolesRepository, PasswordEncoder passwordEncoder) {
-        this.credentialsRepository = credentialsRepository;
-        this.rolesRepository = rolesRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Credentials credentials = credentialsRepository.findByUsername(username);
-        if (credentials == null) {
-            throw new UsernameNotFoundException("Invalid username or password.");
-        }
-
-        Role role = rolesRepository.findByRoleName(credentials.getRole().getName());
-        if (role == null) {
-            throw new UsernameNotFoundException("Role not found.");
-        }
-
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + credentialsRepository.findRoleNameByUsername(username)));
-
-        List<String> permissionNames = rolesRepository.findPermissionNamesByRoleId(role.getRoleId());
-        for (String permissionName : permissionNames) {
-            authorities.add(new SimpleGrantedAuthority(permissionName));
-        }
-
-        // Encode the password before creating the UserDetails object
-        String encodedPassword = passwordEncoder.encode(credentials.getPassword());
-
-        return new User(credentials.getUsername(), encodedPassword, authorities);
-    }
+//@Service
+public class CustomUserDetailsService{// implements UserDetailsService {
+//
+//    private final CredentialsRepository credentialsRepository;
+//    private final RolesRepository rolesRepository;
+//    private final PasswordEncoder passwordEncoder; // Inject the password encoder
+//
+//    @Autowired
+//    public CustomUserDetailsService(CredentialsRepository credentialsRepository, RolesRepository rolesRepository, PasswordEncoder passwordEncoder) {
+//        this.credentialsRepository = credentialsRepository;
+//        this.rolesRepository = rolesRepository;
+//        this.passwordEncoder = passwordEncoder;
+//    }
+//
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        Credentials credentials = credentialsRepository.findByUsername(username);
+//        if (credentials == null) {
+//            throw new UsernameNotFoundException("Invalid username or password.");
+//        }
+//
+//        Role role = rolesRepository.findByRoleName(credentials.getRole().getName());
+//        if (role == null) {
+//            throw new UsernameNotFoundException("Role not found.");
+//        }
+//
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//        authorities.add(new SimpleGrantedAuthority("ROLE_" + credentialsRepository.findRoleNameByUsername(username)));
+//
+//        List<String> permissionNames = rolesRepository.findPermissionNamesByRoleId(role.getRoleId());
+//        for (String permissionName : permissionNames) {
+//            authorities.add(new SimpleGrantedAuthority(permissionName));
+//        }
+//
+//        // Encode the password before creating the UserDetails object
+//        String encodedPassword = passwordEncoder.encode(credentials.getPassword());
+//
+//        return new User(credentials.getUsername(), encodedPassword, authorities);
+//    }
 }

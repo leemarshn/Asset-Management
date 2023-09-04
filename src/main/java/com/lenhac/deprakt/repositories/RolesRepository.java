@@ -9,13 +9,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface RolesRepository extends JpaRepository<Role, Long> {
+//@Repository
+public interface RolesRepository{// extends JpaRepository<Role, Long> {
 
     // Custom method to find a role by its name
-    Role findByRoleName(String roleName);
+//    Role findByRoleName(String roleName);
 
     // Custom method to find permissions by their names associated with a role
-    @Query("SELECT p.name FROM Role r JOIN r.permissions p WHERE r.roleId = :roleId")
-    List<String> findPermissionNamesByRoleId(@Param("roleId") Long roleId);
+//    @Query("SELECT p.name FROM Role r JOIN r.permissions p WHERE r.roleId = :roleId")
+//    List<String> findPermissionNamesByRoleId(@Param("roleId") Long roleId);
 }

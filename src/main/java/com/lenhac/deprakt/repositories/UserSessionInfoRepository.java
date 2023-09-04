@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface UserSessionInfoRepository extends JpaRepository<UserSessionInfo, Long> {
+//@Repository
+public interface UserSessionInfoRepository{// extends JpaRepository<UserSessionInfo, Long> {
 
 }

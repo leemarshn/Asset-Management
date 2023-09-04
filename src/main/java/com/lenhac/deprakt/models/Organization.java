@@ -12,24 +12,24 @@ import lombok.NonNull;
 
 
 
-@Entity
-@Table(name = "organizations")
-@Data
-@NoArgsConstructor
+//@Entity
+//@Table(name = "organizations")
+//@Data
+//@NoArgsConstructor
 public class Organization {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false, unique = true, length = 36)
-
-    private String id;
-
-    @NotNull
-    @Size(min = 3, max = 50)
-    @Column(unique = true)
-    private String name;
-
-    public Organization(@NonNull String name) {
-        this.name = name;
-    }
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id", updatable = false, nullable = false, unique = true, length = 36)
+//
+//    private String id;
+//
+//    @NotNull
+//    @Size(min = 3, max = 50)
+//    @Column(unique = true)
+//    private String name;
+//
+//    public Organization(@NonNull String name) {
+//        this.name = name;
+//    name}
 }
