@@ -1,71 +1,39 @@
 package com.lenhac.deprakt.models;
+
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
 
-//@Entity
-//@Table(name = "assets")
-//@Data
-public class Asset extends BaseEntity {
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "asset_id", updatable = false, nullable = false)
-//    private Long id;
-//
-//    @Column(name = "name", nullable = false)
-//    private String name;
-//
-//    @Column(name = "description")
-//    private String description;
-//
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "asset_type", nullable = false)
-//    private AssetType assetType;
-//
-//    @Column(name = "category")
-//    private String category;
-//
-//    @Column(name = "serial_number", unique = true)
-//    private String serialNumber;
-//
-//    @Column(name = "acquisition_date")
-//    private LocalDate acquisitionDate;
-//
-//    @Column(name = "purchase_cost")
-//    private double purchaseCost;
-//
-//
-//    @Column(name = "life_expectancy")
-//    private Integer lifeExpectancy;
-//
-//    @Column(name = "current_value")
-//    private double currentValue;
-//
-//    @Column(name = "recurring_cost")
-//    private double recurringCost;
-//
-//    @Column(name = "status")
-//    private String status;
-//
-//    @ManyToOne // Many-to-one relationship with Department (asset belongs to a department)
-//    @JoinColumn(name = "department_id")
-//    private Department department;
-//
-//    @ManyToOne // Many-to-one relationship with ServiceProvider (asset's service provider)
-//    @JoinColumn(name = "service_provider_id")
-//    private ServiceProvider serviceProvider;
-//
-//    @ManyToOne // Self-referencing relationship with parent component (asset)
-//    @JoinColumn(name = "parent_component_id")
-//    private Asset parentComponent;
-//
-//    @OneToMany(mappedBy = "parentComponent", cascade = CascadeType.ALL, orphanRemoval = true) // One-to-many relationship with child components (sub-components)
-//    private List<Asset> subComponents = new ArrayList<>();
-//
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Asset {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotBlank(message = "Asset Name can't be blank")
+    private String name;
+    @NotBlank(message = "Type is Require")
+    private String type;
+    @Column(name = "asset_user")
+    private String user;
+    private String supplier;
+    private String model;
+    private String make;
+    @Min(value = 1,message = "an Asset should have a shelf life of more than 1 year")
+    @Max(value = 99, message = "You will not be alive in 100years time")
+    private int shelfLife;
+    @Min(value = 1, message = "The value of the asset must be greater than 1")
+    private double value;
+    private Date purchaseDate;
+    private String notes;
+
 
 }
-
