@@ -5,6 +5,42 @@
   <!-- Add any additional CSS or JavaScript files -->
   <link rel="stylesheet" th:href="@{/css/style.css}">
 
+  <script th:inline="javascript">
+    $(document).ready(function () {
+      const categorySelect = $('#category');
+      const categorySearch = $('#categorySearch');
+      const categoryResults = $('#categoryResults');
+
+      // Function to fetch and filter categories
+      function fetchCategories(searchText) {
+        $.ajax({
+          url: '/fetchCategories', // Replace with the actual endpoint
+          data: { searchText: searchText },
+          success: function (categories) {
+            categoryResults.empty();
+            categories.forEach(function (category) {
+              categoryResults.append('<div>' + category.name + '</div>');
+            });
+          }
+        });
+      }
+
+      // Event listener for search input
+      categorySearch.on('input', function () {
+        const searchText = categorySearch.val();
+        fetchCategories(searchText);
+      });
+
+      // Event listener for category selection
+      categoryResults.on('click', 'div', function () {
+        const selectedCategory = $(this).text();
+        categorySelect.val(selectedCategory);
+        categoryResults.empty();
+      });
+    });
+  </script>
+
+
 </head>
 <body>
 <div th:insert="~{fragments/bootstrap :: bootstrap}"></div>
@@ -26,6 +62,17 @@
           <option th:value="desk">Desk</option>
         </select>
       </div>
+
+      <div class="form-group col-md-6">
+        <label for="type">Category:</label>
+        <input type="text" class="form-control" id="categorySearch" placeholder="Search Categories">
+        <div id="categoryResults"></div>
+        <select class="form-control" id="category" th:field="*{category}" required>
+          <!-- Leave this empty for now; options will be populated dynamically -->
+        </select>
+      </div>
+
+
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">

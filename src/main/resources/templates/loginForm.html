@@ -1,71 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <!-- Bootstrap CSS link -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Molengo&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lekton&display=swap" rel="stylesheet">
-    <style>
+    <title>Welcome to Asset Management</title>
+    <!-- Add any additional CSS or JavaScript files -->
 
-        body {
-            background-color: #334b5c;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        /* Additional CSS for the image column */
-        .img-column {
-            height: 100%;
-            padding: 0;
-        }
-
-        /* CSS for the login button */
-        .login-button {
-            float: right;
-        }
-
-        /* Apply Molengo font to the header and organization name */
-        h3, h4 {
-            font-family: 'Molengo', sans-serif;
-        }
-
-        /* Apply Lekton font to the "Not your store?" text */
-        .small-text {
-            font-family: 'Lekton', sans-serif;
-        }
-
-        /* Center the content vertically */
-        .row {
-            display: flex;
-            align-items: center;
-        }
-        .btn-primary {
-            background-color: #e84444; /* Changed to the specific shade of red */
-            border-color: #e84444; /* Changed to the specific shade of red */
-        }
-        .btn-primary:hover {
-            background-color: #334b5c;
-            border-color: #ffffff;
-        }
-
-    </style>
 </head>
-<body>
+<div th:insert="~{fragments/bootstrap :: bootstrap}"></div>
+<!--<div th:insert="~{fragments/menu :: menu}"></div>-->
+<body class="bg-default">
+
 <div class="container mt-5">
     <div class="row justify-content-center"> <!-- Add justify-content-center class here -->
         <!-- Form Column -->
         <div class="col-md-6">
-            <h3 class="mb-4">Enterprise Resource Planning System (Lenhac)</h3>
+            <h3 class="mb-4 text-white">Enterprise Resource Planning System (Lenhac)</h3>
             <div class="d-flex justify-content-between mb-2"> <!-- Use d-flex and justify-content-between classes -->
-                <h4 class="mb-0">Lenhac</h4> <!-- Replace "Lenhac" with the actual organization name -->
-                <p class="small-text mb-0">Not your store?</p> <!-- Add the "Not your store?" text here -->
+                <h4 class="mb-0 text-white">Lenhac</h4> <!-- Replace "Lenhac" with the actual organization name -->
+                <p class="small-text mb-0 text-danger">Not your store?</p>
             </div>
             <div class="card">
                 <div class="card-body">
@@ -80,7 +31,7 @@
                         </div>
                         <div class="d-flex justify-content-between mb-3"> <!-- Add this d-flex container -->
                             <a href="#" class="small-text">Forgot password</a>
-                            <button type="submit" class="btn btn-primary login-button">Sign In</button>
+                            <button type="submit" class="btn btn-danger">Sign In</button>
                         </div>
                     </form>
                 </div>
@@ -89,14 +40,13 @@
         <!-- Image Column -->
         <!-- Image Column -->
         <div class="col-md-6 d-flex align-items-stretch"> <!-- Add the "img-column" class here -->
-            <img src="/deprakt/src/main/resources/static/images/login5.png" alt="Image" class="img-fluid"> <!-- Add "h-100" class here to make the image the same height -->
+            <img src="/images/login2-01.png" alt="Image" class="img-fluid"> <!-- Add "h-100" class here to make the image the same height -->
         </div>
     </div>
 </div>
 
 <!-- Bootstrap JS and jQuery links for optional functionality -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
+<div th:insert="~{fragments/footer :: footer}"></div>
 </html>

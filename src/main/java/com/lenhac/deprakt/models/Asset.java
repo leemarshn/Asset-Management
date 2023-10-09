@@ -22,6 +22,9 @@ public class Asset {
     private String name;
     @NotBlank(message = "Type is Require")
     private String type;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
     @Column(name = "asset_user")
     private String user;
     private String supplier;

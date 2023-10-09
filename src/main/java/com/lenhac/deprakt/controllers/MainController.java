@@ -3,9 +3,12 @@ package com.lenhac.deprakt.controllers;
 
 import com.lenhac.deprakt.dto.AssetDTO;
 import com.lenhac.deprakt.models.Asset;
+import com.lenhac.deprakt.models.Category;
 import com.lenhac.deprakt.repositories.AssetRepo;
+import com.lenhac.deprakt.repositories.CategoryRepo;
 import com.lenhac.deprakt.services.AssetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,9 @@ import java.util.List;
 @Controller
 public class MainController {
     private Asset asset;
+
+    @Autowired
+    private CategoryRepo categoryRepository;
 
     private final AssetService assetService;
     @Autowired
@@ -36,7 +42,10 @@ public class MainController {
         }
         return "index";
     }
-
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "loginForm"; // This assumes "loginForm.html" is in the templates directory.
+    }
 
     @GetMapping("/new")
     public String showNewAssetForm(Model model) {
@@ -132,6 +141,19 @@ public class MainController {
         }
         return "redirect:/";
     }
+
+    @GetMapping("/fetchCategories")
+    public ResponseEntity<List<Category>> fetchCategories(@RequestParam String searchText) {
+        List<Category> categories = categoryRepository.findByNameContainingIgnoreCase(searchText);
+        return ResponseEntity.ok(categories);
+    }
+    @PostMapping("/saveCategory")
+    public String saveCategory(@ModelAttribute("newCategory") Category newCategory) {
+        categoryRepository.save(newCategory);
+        return "redirect:/categories";
+    }
+
+
 //
 //    @ExceptionHandler(Exception.class)
 //    public String handleError(Exception exception, Model model) {
