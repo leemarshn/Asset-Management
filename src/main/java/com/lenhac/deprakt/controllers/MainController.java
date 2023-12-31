@@ -149,7 +149,7 @@ public class MainController {
     }
     @GetMapping("/save-category")
     public String showSaveCategoriesPage() {
-        return "save-category";
+        return "add-category";
     }
     @PostMapping("/saveCategory")
     public String saveCategory(@ModelAttribute("newCategory") Category newCategory) {
