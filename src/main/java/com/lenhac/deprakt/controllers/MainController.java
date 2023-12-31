@@ -50,7 +50,7 @@ public class MainController {
     @GetMapping("/new")
     public String showNewAssetForm(Model model) {
         model.addAttribute("asset", new Asset());
-        return "new_asset";
+        return "add_asset";
     }
 
     @PostMapping("/assets")
@@ -146,6 +146,10 @@ public class MainController {
     public ResponseEntity<List<Category>> fetchCategories(@RequestParam String searchText) {
         List<Category> categories = categoryRepository.findByNameContainingIgnoreCase(searchText);
         return ResponseEntity.ok(categories);
+    }
+    @GetMapping("/save-category")
+    public String showSaveCategoriesPage() {
+        return "save-category";
     }
     @PostMapping("/saveCategory")
     public String saveCategory(@ModelAttribute("newCategory") Category newCategory) {
