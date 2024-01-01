@@ -15,16 +15,13 @@
             <h5 style="color: red">Add Category</h5>
         </div>
     </div>
-    <form class="border p-4 bg-light">
+    <form th:action="@{/save-category}" th:object="${newCategory}" class="border p-4 bg-light" method="post">
         <div class="form-row d-flex justify-content-between">
-            <input type="text" placeholder="Category name" class="form-control col-md-5" id="cat_name">
-            <select class="form-control col-md-5" id="sub_category">
-                <option value="option1">Parent Category</option>
-                <option value="option2">Option 2</option>
-            </select>
-            <button type="button" class="btn btn-primary">Submit</button>
+            <input type="text" th:field="*{name}" placeholder="Category name" class="form-control col-md-5" id="cat_name">
+            <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
+
 
 </main>
 </body>

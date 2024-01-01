@@ -7,10 +7,13 @@ import com.lenhac.deprakt.models.Category;
 import com.lenhac.deprakt.repositories.AssetRepo;
 import com.lenhac.deprakt.repositories.CategoryRepo;
 import com.lenhac.deprakt.services.AssetService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -142,19 +145,27 @@ public class MainController {
         return "redirect:/";
     }
 
-    @GetMapping("/fetchCategories")
-    public ResponseEntity<List<Category>> fetchCategories(@RequestParam String searchText) {
-        List<Category> categories = categoryRepository.findByNameContainingIgnoreCase(searchText);
-        return ResponseEntity.ok(categories);
-    }
-    @GetMapping("/save-category")
-    public String showSaveCategoriesPage() {
-        return "add-category";
-    }
-    @PostMapping("/saveCategory")
-    public String saveCategory(@ModelAttribute("newCategory") Category newCategory) {
-        categoryRepository.save(newCategory);
-        return "redirect:/categories";
+//    @GetMapping("/fetchCategories")
+//    public ResponseEntity<List<Category>> fetchCategories(@RequestParam String searchText) {
+//        List<Category> categories = categoryRepository.findByNameContainingIgnoreCase(searchText);
+//        return ResponseEntity.ok(categories);
+//    }
+// Assuming a separate GET method for displaying the form
+@GetMapping("/add-category")
+public String showAddCategoryForm(Model model) {
+    model.addAttribute("newCategory", new Category());
+    return "add-category";
+}
+
+    @PostMapping("/save-category")
+    @Transactional // Ensure data consistency
+    public String saveCategory(@Valid @ModelAttribute("newCategory") Category category, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "add-category"; // Return to the form for corrections
+        }
+
+        categoryRepository.save(category);
+        return "redirect:/add-category"; // Redirect to the form with success message (or a different view as needed)
     }
 
 
