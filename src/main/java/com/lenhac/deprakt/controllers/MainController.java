@@ -52,6 +52,8 @@ public class MainController {
 
     @GetMapping("/new")
     public String showNewAssetForm(Model model) {
+        List<Category> categories = categoryRepository.findAll();
+        model.addAttribute("categories", categories);
         model.addAttribute("asset", new Asset());
         return "add_asset";
     }
@@ -145,12 +147,7 @@ public class MainController {
         return "redirect:/";
     }
 
-//    @GetMapping("/fetchCategories")
-//    public ResponseEntity<List<Category>> fetchCategories(@RequestParam String searchText) {
-//        List<Category> categories = categoryRepository.findByNameContainingIgnoreCase(searchText);
-//        return ResponseEntity.ok(categories);
-//    }
-// Assuming a separate GET method for displaying the form
+
 @GetMapping("/add-category")
 public String showAddCategoryForm(Model model) {
     model.addAttribute("newCategory", new Category());

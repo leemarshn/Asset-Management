@@ -4,3 +4,9 @@ function del(id) {
         location.href = '/assets/delete/' + id;
     }
 }
+
+document.getElementById('category').addEventListener('change', function() {
+    if (this.value === '') {
+        window.location.href = '/add-category';
+    }
+});
