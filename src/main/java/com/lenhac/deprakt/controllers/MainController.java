@@ -7,6 +7,7 @@ import com.lenhac.deprakt.models.Category;
 import com.lenhac.deprakt.repositories.AssetRepo;
 import com.lenhac.deprakt.repositories.CategoryRepo;
 import com.lenhac.deprakt.services.AssetService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -154,16 +155,33 @@ public String showAddCategoryForm(Model model) {
     return "add-category";
 }
 
-    @PostMapping("/save-category")
-    @Transactional // Ensure data consistency
-    public String saveCategory(@Valid @ModelAttribute("newCategory") Category category, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "add-category"; // Return to the form for corrections
-        }
+//    @PostMapping("/save-category")
+//    @Transactional // Ensure data consistency
+//    public String saveCategory(@Valid @ModelAttribute("newCategory") Category category, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            return "add-category"; // Return to the form for corrections
+//        }
+//
+//        categoryRepository.save(category);
+//        return "redirect:/add-category"; // Redirect to the form with success message (or a different view as needed)
+//    }
 
+    @PostMapping("/save-category")
+    public String createCategory(@ModelAttribute Category category, RedirectAttributes redirectAttributes, HttpServletRequest request) {
         categoryRepository.save(category);
-        return "redirect:/add-category"; // Redirect to the form with success message (or a different view as needed)
+
+        // Check for a referring URL (where the user came from)
+        String referer = request.getHeader("Referer");
+
+        if (referer != null && !referer.isEmpty() && !referer.equals(request.getRequestURL().toString())) {
+            // If there's a valid referring URL, redirect back to it
+            return "redirect:" + referer;
+        } else {
+            // Otherwise, redirect to the add-category page itself
+            return "redirect:/add-category";
+        }
     }
+
 
 
 //
