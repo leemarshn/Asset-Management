@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <title>Categories</title>
+    <!-- Add any additional CSS or JavaScript files -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:insert="~{fragments/bootstrap :: bootstrap}"></div>
+<div th:insert="~{fragments/menu :: menu}"></div>
+
+<main class="container mt-5">
+
+        <h2 class="mt-4">Manage Categories</h2>
+
+        <div th:if="${success}" class="alert alert-success"><p th:text="${success}"></p></div>
+        <div th:if="${error}" class="alert alert-danger"><p th:text="${error}"></p></div>
+
+
+    <form th:action="@{/categories}" th:object="${category}" class="form-inline" method="post">
+
+        <div class="row">
+            <div class="col-md-8">
+                <label for="cat_name" class="sr-only">Category Name</label>
+                <div class="input-group">
+                    <input type="text" th:field="*{name}" class="form-control mb-2 mr-sm-2" id="cat_name"
+                           placeholder="Enter category name" required>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+        <table class="table mt-4">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="category : ${categories}">
+                <td><a th:href="@{/categories/edit/{id}(id=${category.id})}" th:text="${category.id}"></a></td>
+                <td th:text="${category.name}"></td>
+                <td>
+                    <a th:href="@{/categories/edit/{id}(id=${category.id})}" class="btn btn-sm btn-primary">Edit</a>
+                    <button th:href="@{/categories/delete/{id}(id=${category.id})}" class="btn btn-sm btn-danger">Delete</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+</main>
+</body>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</html>

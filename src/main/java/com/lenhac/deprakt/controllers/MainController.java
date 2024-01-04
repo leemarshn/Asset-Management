@@ -149,41 +149,6 @@ public class MainController {
     }
 
 
-@GetMapping("/add-category")
-public String showAddCategoryForm(Model model) {
-    model.addAttribute("newCategory", new Category());
-    return "add-category";
-}
-
-//    @PostMapping("/save-category")
-//    @Transactional // Ensure data consistency
-//    public String saveCategory(@Valid @ModelAttribute("newCategory") Category category, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            return "add-category"; // Return to the form for corrections
-//        }
-//
-//        categoryRepository.save(category);
-//        return "redirect:/add-category"; // Redirect to the form with success message (or a different view as needed)
-//    }
-
-    @PostMapping("/save-category")
-    public String createCategory(@ModelAttribute Category category, RedirectAttributes redirectAttributes, HttpServletRequest request) {
-        categoryRepository.save(category);
-
-        // Check for a referring URL (where the user came from)
-        String referer = request.getHeader("Referer");
-
-        if (referer != null && !referer.isEmpty() && !referer.equals(request.getRequestURL().toString())) {
-            // If there's a valid referring URL, redirect back to it
-            return "redirect:" + referer;
-        } else {
-            // Otherwise, redirect to the add-category page itself
-            return "redirect:/add-category";
-        }
-    }
-
-
-
 //
 //    @ExceptionHandler(Exception.class)
 //    public String handleError(Exception exception, Model model) {
