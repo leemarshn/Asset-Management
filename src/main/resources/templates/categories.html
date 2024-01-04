@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
-    <title>Categories</title>
+    <title>category</title>
     <!-- Add any additional CSS or JavaScript files -->
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
@@ -13,27 +13,30 @@
 
         <h2 class="mt-4">Manage Categories</h2>
 
-        <div th:if="${success}" class="alert alert-success"><p th:text="${success}"></p></div>
-        <div th:if="${error}" class="alert alert-danger"><p th:text="${error}"></p></div>
+    <div th:if="${success}" class="alert alert-success" role="alert">
+        Category added successfully!
+    </div>
+
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        <strong>Error!</strong> <span th:text="${error}"></span>
+    </div>
 
 
-    <form th:action="@{/categories}" th:object="${category}" class="form-inline" method="post">
-
-        <div class="row">
-            <div class="col-md-8">
-                <label for="cat_name" class="sr-only">Category Name</label>
-                <div class="input-group">
-                    <input type="text" th:field="*{name}" class="form-control mb-2 mr-sm-2" id="cat_name"
-                           placeholder="Enter category name" required>
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+        <form th:action="@{/categories}" th:object="${category}" class="mt-4 border p-4 bg-light" method="post">
+            <div class="form-row">
+            <label for="cat_name" class="col-form-label sr-only">Category Name:</label>
+                <div class="form-group col-md-10">
+                    <input type="text" th:field="*{name}" class="form-control" id="cat_name" placeholder="Enter category name" required>
+                </div>
+                <div class="form-group col-md-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
 
-        <table class="table mt-4">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+        <table class="table table-bordered table-striped mb-0">
             <thead>
             <tr>
                 <th>ID</th>
@@ -52,6 +55,8 @@
             </tr>
             </tbody>
         </table>
+    </div>
+
 </main>
 </body>
 <div th:insert="~{fragments/footer :: footer}"></div>
