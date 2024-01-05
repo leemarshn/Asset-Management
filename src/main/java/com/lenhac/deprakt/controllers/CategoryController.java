@@ -4,16 +4,14 @@ import com.lenhac.deprakt.exceptions.DuplicateCategoryException;
 import com.lenhac.deprakt.models.Category;
 import com.lenhac.deprakt.repositories.CategoryRepo;
 import com.lenhac.deprakt.services.CategoryService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +21,12 @@ import java.util.Map;
 
 @Controller
 public class CategoryController {
+
+
+    private final  CategoryRepo categoryRepo;
     private final CategoryService categoryService;
-    public CategoryController(CategoryService categoryService) {
+    public CategoryController(CategoryRepo categoryRepo, CategoryService categoryService) {
+        this.categoryRepo = categoryRepo;
         this.categoryService = categoryService;
     }
     @GetMapping("/categories")
@@ -54,6 +56,25 @@ public class CategoryController {
 
         return "redirect:/categories";
     }
+
+
+    @DeleteMapping("/category/delete/{id}")
+    @ResponseBody  // Indicate a JSON response instead of rendering a view
+    public Map<String, String> deleteCategory(@PathVariable Long id) {
+        Map<String, String> response = new HashMap<>();
+        try {
+            if (categoryRepo.existsById(id)) {
+                categoryRepo.deleteById(id);
+                response.put("success", "Category deleted successfully");
+            } else {
+                response.put("error", "Category not found");
+            }
+        } catch (Exception e) {
+            response.put("error", "An error occurred while deleting the category");
+        }
+        return response;
+    }
+
 
 
 }

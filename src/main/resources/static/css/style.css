@@ -58,23 +58,6 @@ h3, h4 {
     background-color: red;
 }
 
-
-/* used by the table */
-.my-custom-scrollbar {
-    position: relative;
-    height: 100px;
-    overflow: auto;
-}
-.table-wrapper-scroll-y {
-    display: block;
-}
-
-
-/* end of table css */
-
-
-
-
 .update-button {
     margin-bottom: 10px !important;
 }

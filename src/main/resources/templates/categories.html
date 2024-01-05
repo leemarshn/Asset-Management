@@ -34,9 +34,9 @@
             </div>
         </form>
 
-    <div class="table-wrapper-scroll-y my-custom-scrollbar">
 
-        <table class="table table-bordered table-striped mb-0">
+    <div style="width:100%;overflow:auto; max-height:300px;">
+        <table class="table table-sm" style="width:100%;">
             <thead>
             <tr>
                 <th>ID</th>
@@ -49,13 +49,18 @@
                 <td><a th:href="@{/categories/edit/{id}(id=${category.id})}" th:text="${category.id}"></a></td>
                 <td th:text="${category.name}"></td>
                 <td>
-                    <a th:href="@{/categories/edit/{id}(id=${category.id})}" class="btn btn-sm btn-primary">Edit</a>
-                    <button th:href="@{/categories/delete/{id}(id=${category.id})}" class="btn btn-sm btn-danger">Delete</button>
+                    <a th:href="@{/categories/edit/{id}(id=${category.id})}" class="btn btn-sm btn-primary">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <button th:data-id="${category.id}" onclick="deleteCategory(this.getAttribute('data-id'))" class="btn btn-sm btn-danger">
+                      <i class="fas fa-trash"></i>
+                    </button>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
+
 
 </main>
 </body>
