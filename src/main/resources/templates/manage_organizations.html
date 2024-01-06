@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <title>Manage Organizations</title>  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:insert="~{fragments/bootstrap :: bootstrap}"></div>
+<div th:insert="~{fragments/menu :: menu}"></div>
+
+<main class="container mt-5">
+
+    <h2 class="mt-4">Manage Organizations</h2>  <div th:if="${success}" class="alert alert-success" role="alert">
+    Organization added successfully!  </div>
+
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        <strong>Error!</strong> <span th:text="${error}"></span>
+    </div>
+
+    <button type="button" class="btn btn-primary mt-4" onclick="searchOrganizations()">Search</button>  <div style="width:100%;overflow:auto; max-height:300px;">
+    <table class="table table-sm" style="width:100%;">
+        <thead>
+        <tr>
+            <th>Name</th>  <th>Phone Number</th>  <th>PIN Number</th>  <th>Email Address</th>  <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="organizationDTO : ${organizations}">
+            <td th:text="${organizationDTO.name}"></td>
+            <td th:text="${organizationDTO.phoneNumber}"></td>
+            <td th:text="${organizationDTO.pinNumber}"></td>
+            <td th:text="${organizationDTO.emailAddress}"></td>
+            <td>
+                <a th:href="@{/organizations/edit/{id}(id=${organizationDTO.id})}" th:text="${organizationDTO.id}"></a>
+                <a th:href="@{/organizations/edit/{id}(id=${organizationDTO.id})}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <button th:data-id="${organizationDTO.id}" onclick="deleteOrganization(this.getAttribute('data-id'))" class="btn btn-sm btn-danger">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+</main>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</html>

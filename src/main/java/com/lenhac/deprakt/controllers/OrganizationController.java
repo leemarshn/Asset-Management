@@ -1,5 +1,6 @@
 package com.lenhac.deprakt.controllers;
 
+import com.lenhac.deprakt.dto.OrganizationDTO;
 import com.lenhac.deprakt.models.Organization;
 import com.lenhac.deprakt.repositories.OrganisationRepository;
 import com.lenhac.deprakt.services.OrganizationService;
@@ -10,6 +11,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Lee N on 06, Sat,Jan,2024.
@@ -43,6 +47,24 @@ public class OrganizationController {
         organizationService.saveOrganization(organizationForm); // Use the service to save
 
         return "redirect:/organization/new";
+    }
+
+    @GetMapping("/organization")
+    public String showOrganizations(Model model) {
+        List<Organization> organizations = organizationService.getAllOrganizations();
+
+        // Fetch only necessary fields for efficiency
+        List<OrganizationDTO> organizationDTOs = organizations.stream()
+                .map(organization -> new OrganizationDTO(
+                        organization.getId(),
+                        organization.getName(),
+                        organization.getPhoneNumber(),
+                        organization.getPinNumber(),
+                        organization.getEmailAddress()))
+                .collect(Collectors.toList());
+
+        model.addAttribute("organizations", organizationDTOs);
+        return "manage_organizations";
     }
 }
 
