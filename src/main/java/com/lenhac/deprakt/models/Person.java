@@ -23,7 +23,7 @@ public abstract class Person extends Base {
 
 
     @Column(nullable = false)
-    private String surname;  // Renamed from "surname" for consistency
+    private String firstName;  // Renamed from "surname" for consistency
 
     @Column(nullable = false)
     private String lastName;

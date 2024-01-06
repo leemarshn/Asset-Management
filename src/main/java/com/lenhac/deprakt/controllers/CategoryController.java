@@ -1,6 +1,6 @@
 package com.lenhac.deprakt.controllers;
 
-import com.lenhac.deprakt.exceptions.DuplicateCategoryException;
+import com.lenhac.deprakt.exceptions.InvalidException;
 import com.lenhac.deprakt.models.Category;
 import com.lenhac.deprakt.repositories.CategoryRepo;
 import com.lenhac.deprakt.services.CategoryService;
@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * Created by Lee N on 04, Thu,Jan,2024.
@@ -50,7 +49,7 @@ public class CategoryController {
         try {
             categoryService.saveCategory(category);
             redirectAttributes.addFlashAttribute("success", "Category added successfully!");
-        } catch (DuplicateCategoryException e) {
+        } catch (InvalidException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
 

@@ -32,4 +32,11 @@ public class Employee  {
     @JoinColumn(name = "person_id")
     private Person person;
 
+    @OneToOne(mappedBy = "credentials")
+    private Credentials credentials;
+
+    @ManyToOne(fetch = FetchType.LAZY) // Consider eager loading if needed
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
+
 }

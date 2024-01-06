@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 
 //@Repository
-public interface OrganisationRepository{// extends JpaRepository<Organization, String> {
+public interface OrganisationRepository extends JpaRepository<Organization, Long> {
 }

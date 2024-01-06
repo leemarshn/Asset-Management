@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-//@Repository
-public interface RolesRepository{// extends JpaRepository<Role, Long> {
+@Repository
+public interface RolesRepository extends JpaRepository<Role, Long> {
 
     // Custom method to find a role by its name
 //    Role findByRoleName(String roleName);

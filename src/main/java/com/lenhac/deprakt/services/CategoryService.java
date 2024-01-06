@@ -1,6 +1,6 @@
 package com.lenhac.deprakt.services;
 
-import com.lenhac.deprakt.exceptions.DuplicateCategoryException;
+import com.lenhac.deprakt.exceptions.InvalidException;
 import com.lenhac.deprakt.models.Category;
 import com.lenhac.deprakt.repositories.CategoryRepo;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class CategoryService {
 
     public Category saveCategory(Category category) {
         if (categoryRepository.existsByName(category.getName())) {
-            throw new DuplicateCategoryException("Category with name " + category.getName() + " already exists");
+            throw new InvalidException("Category with name " + category.getName() + " already exists");
         } else {
             return categoryRepository.save(category);
         }
