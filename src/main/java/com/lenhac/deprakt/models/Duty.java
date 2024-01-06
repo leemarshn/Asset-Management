@@ -1,14 +1,9 @@
 package com.lenhac.deprakt.models;
-import jakarta.persistence.*;
-import lombok.Data;
-
-import java.time.LocalDate;
-import java.util.List;
 
 //@Entity
 //@Table(name = "tasks")
 //@Data
-public class Duty extends BaseEntity {
+public class Duty extends Base {
 
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)

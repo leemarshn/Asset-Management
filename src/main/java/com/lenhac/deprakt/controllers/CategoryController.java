@@ -39,16 +39,6 @@ public class CategoryController {
         return "categories";
     }
 
-
-    @GetMapping("/categories/edit/{id}")
-    public String edit(Model model, @PathVariable String id) {
-        List<Category> categories = categoryService.getAllCategories();
-        model.addAttribute("categories", categories);
-        model.addAttribute("category", new Category());
-
-        return "edit_category";
-    }
-
     @PostMapping("/categories")
     public String store(@ModelAttribute("category") @Valid Category category, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
@@ -83,6 +73,16 @@ public class CategoryController {
             response.put("error", "An error occurred while deleting the category");
         }
         return response;
+    }
+
+
+    @GetMapping("/categories/edit/{id}")
+    public String edit(Model model, @PathVariable String id) {
+        List<Category> categories = categoryService.getAllCategories();
+        model.addAttribute("categories", categories);
+        model.addAttribute("category", new Category());
+
+        return "edit_category";
     }
 
 

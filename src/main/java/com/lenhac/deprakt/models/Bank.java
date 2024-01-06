@@ -1,14 +1,9 @@
 package com.lenhac.deprakt.models;
 
-import jakarta.persistence.*;
-import lombok.Data;
-
-import java.util.List;
-
 //@Entity
 //@Table(name = "banks")
 //@Data
-public class Bank extends BaseEntity {
+public class Bank extends Base {
 
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -5,26 +5,37 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.UUID;
-//@Entity
-//@Getter
-//@Setter
-//@AllArgsConstructor
-public class Person extends BaseEntity {
 
-//    @Id
-//    @Column(name = "person_id", updatable = false, nullable = false, unique = true, length = 36)
-//    private String personId; // Don't use @GeneratedValue for UUID
-//
-//    @Column(nullable = false)
-//    private String surname;
-//
-//    @Column(nullable = false)
-//    private String lastName;
-//
-//    public Person() {
-//        this.personId = UUID.randomUUID().toString();
-//    }
+import java.time.LocalDateTime;
 
-    // Constructors, getters, and setters
+@Entity  // Mark as an entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public abstract class Person extends Base {
+
+    @Id  // Add ID annotation
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto-generate ID
+    private Long id;
+    @OneToOne(mappedBy = "person")  // Unidirectional relationship
+    private Employee employee;
+
+
+    @Column(nullable = false)
+    private String surname;  // Renamed from "surname" for consistency
+
+    @Column(nullable = false)
+    private String lastName;
+
+    @Column(nullable = false, unique = true)  // Enforce unique email
+    private String email;
+
+    @Column  // No nullable constraint, making it optional
+    private LocalDateTime dateOfBirth;
+
+    @Column(nullable = false)
+    private String phoneNumber;
+
+    private String details;
 }
