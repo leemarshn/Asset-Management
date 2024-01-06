@@ -40,7 +40,7 @@ public class Credentials implements UserDetails {
     )
     private Set<Role> roles = new HashSet<>();
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
 

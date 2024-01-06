@@ -5,6 +5,7 @@ import com.lenhac.deprakt.models.Credentials;
 import com.lenhac.deprakt.repositories.CredentialsRepository;
 import com.lenhac.deprakt.repositories.EmployeeRepository;
 import com.lenhac.deprakt.repositories.RolesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,7 +22,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-
         private final CredentialsRepository credentialsRepository;
 
 

@@ -46,11 +46,11 @@ public class MainController {
         }
         return "index";
     }
-    @GetMapping("/login")
-    public String showLoginForm() {
-        return "loginForm"; // This assumes "loginForm.html" is in the templates directory.
-    }
-
+//    @GetMapping("/login")
+//    public String showLoginForm() {
+//        return "loginForm"; // This assumes "loginForm.html" is in the templates directory.
+//    }
+//
     @GetMapping("/new")
     public String showNewAssetForm(Model model) {
         List<Category> categories = categoryRepository.findAll();

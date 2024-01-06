@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
 
 
 @Entity
@@ -32,7 +31,7 @@ public class Employee  {
     @JoinColumn(name = "person_id")
     private Person person;
 
-    @OneToOne(mappedBy = "credentials")
+    @OneToOne(mappedBy = "employee")  // Change to "employee"
     private Credentials credentials;
 
     @ManyToOne(fetch = FetchType.LAZY) // Consider eager loading if needed
