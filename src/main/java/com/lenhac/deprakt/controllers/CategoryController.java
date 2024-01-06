@@ -56,7 +56,6 @@ public class CategoryController {
         return "redirect:/categories";
     }
 
-
     @DeleteMapping("/category/delete/{id}")
     @ResponseBody  // Indicate a JSON response instead of rendering a view
     public Map<String, String> deleteCategory(@PathVariable Long id) {

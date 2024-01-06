@@ -24,15 +24,16 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/login").permitAll()
-                        .requestMatchers("/dashboard").hasAnyRole()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/services/**", "/department/**", "/profile/**").hasAnyRole()
+                        .requestMatchers("/dashboard").permitAll()
+                        .requestMatchers("/organization/**").permitAll()
+//                        .requestMatchers("/admin/**").hasRole("ADMIN")
+//                        .requestMatchers("/services/**", "/department/**", "/profile/**").hasAnyRole()
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/include").permitAll()
                         .requestMatchers("/about", "/register").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
-                        .loginPage("/loginForm") // Updated to match your login form URL
+                        .loginPage("/login") // Updated to match your login form URL
                         .permitAll()
                 )
                 .logout(logout -> logout

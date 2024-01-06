@@ -30,7 +30,7 @@ public class SecurityController {
 
     @GetMapping("/login")
     public String loginPage() {
-        return "login"; // Assuming you have a login.html template
+        return "loginForm";
     }
 
     @PostMapping("/login")
@@ -44,7 +44,7 @@ public class SecurityController {
             return "redirect:/index"; // Redirect to a secured page
         } catch (InvalidException e) {
             model.addAttribute("error", "Invalid username or password");
-            return "loginForm";
+            return "redirect:/login";
         }
     }
 }

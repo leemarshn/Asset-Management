@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+  <title>Welcome to Asset Management</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:insert="~{fragments/bootstrap :: bootstrap}"></div>
+<div th:insert="~{fragments/menu :: menu}"></div>
+<main class="container mt-5">
+  <h4 style="color: red">Create New Asset</h4>
+
+  <form class="border p-4 bg-light" th:action="@{/organization/new}" method="post" th:object="${organizationForm}">
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" th:field="*{name}" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="uniqueName">Unique Name:</label>
+        <input type="text" class="form-control" id="uniqueName" th:field="*{uniqueName}" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="emailAddress">Email Address:</label>
+        <input type="email" class="form-control" id="emailAddress" th:field="*{emailAddress}" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="pinNumber">PIN Number:</label>
+        <input type="number" class="form-control" id="pinNumber" th:field="*{pinNumber}">
+      </div>
+      <div class="form-group col-md-8">
+        <label for="logoPath">Logo Path:</label>
+        <input type="text" class="form-control" id="logoPath" th:field="*{logoPath}">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Notes:</label>
+      <textarea class="form-control" id="notes" th:field="*{notes}"></textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-12 text-right">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+
+
+
+</main>
+</body>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</html>

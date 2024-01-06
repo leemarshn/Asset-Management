@@ -6,10 +6,15 @@ package com.lenhac.deprakt.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +23,9 @@ import java.util.List;
 @Table(name = "organizations")
 @Data
 @NoArgsConstructor
-public class Organization {
+@AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
+public class Organization{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,11 +36,41 @@ public class Organization {
     @Size(min = 3, max = 50)
     @Column(unique = true)
     private String name;
+
+    @Column(name = "unique_name", unique = true)  // Enforce unique constraint
+    private String uniqueName;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "email_address")
+    private String emailAddress;
+
+    @Column(name = "pin_number")
+    private Integer pinNumber;
+
+    @Column(name = "logo_path")
+    private String logoPath;
+
+    @Column(name = "notes")
+    private String notes;
+
     @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
     private List<Employee> employees = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "created_by_id")
+    private Person createdBy;
 
-    public Organization(@NonNull String name) {
-        this.name = name;
-    }
+    @OneToOne
+    @JoinColumn(name = "modified_by_id")
+    private Person modifiedBy;
+
+    @CreatedDate
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    private LocalDateTime lastModifiedAt;
+
+
 }
