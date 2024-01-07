@@ -16,11 +16,11 @@ public abstract class Base {
 
     @ManyToOne
     @JoinColumn(name = "created_by_id")
-    private Person createdBy;
+    private Employee createdBy;
 
     @ManyToOne
     @JoinColumn(name = "modified_by_id")
-    private Person modifiedBy;
+    private Employee modifiedBy;
 
     @ManyToOne
     @JoinColumn(name = "organization_id")

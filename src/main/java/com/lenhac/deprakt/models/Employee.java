@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Table(name = "employees")
 @Getter
 @Setter
-public class Employee  {
+public class Employee  extends Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,12 +27,14 @@ public class Employee  {
     @Column(nullable = false)
     private Status status;
 
-    @OneToOne
-    @JoinColumn(name = "person_id")
-    private Person person;
-
     @OneToOne(mappedBy = "employee")  // Change to "employee"
     private Credentials credentials;
+
+    private String Position;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
 
     @ManyToOne(fetch = FetchType.LAZY) // Consider eager loading if needed
     @JoinColumn(name = "organization_id")

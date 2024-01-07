@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <title>Welcome to Asset Management</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:insert="~{fragments/bootstrap :: bootstrap}"></div>
+<div th:insert="~{fragments/menu :: menu}"></div>
+<main class="container mt-5">
+
+
+    <h2 class="mb-4">Create Employee</h2>
+
+    <div th:if="${success}" class="alert alert-success" role="alert">
+        Category added successfully!
+    </div>
+
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        <strong>Error!</strong> <span th:text="${error}"></span>
+    </div>
+
+
+    <form th:action="@{/organization/employee/new}" th:object="${employeeForm}" method="post" class="needs-validation" novalidate>
+
+        <!-- Person details -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required/>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" th:field="*{email}" required/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="tel" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" required/>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="department" class="col-sm-2 col-form-label">Department</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="department" th:field="*{department}">
+                    <option th:each="department : ${allDepartments}"
+                            th:value="${department.id}"
+                            th:text="${department.name}">
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="position" class="col-sm-2 col-form-label">Position</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="position" th:field="*{position}" placeholder="Enter position">
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth:</label>
+                    <input type="date" class="form-control" id="dateOfBirth" th:field="*{dateOfBirth}" required/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="nationalId">National ID:</label>
+                    <input type="text" class="form-control" id="nationalId" th:field="*{nationalId}" required/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="employmentStartDate">Employment Start Date:</label>
+                    <input type="date" class="form-control" id="employmentStartDate" th:field="*{employmentStartDate}" required/>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="details">Details:</label>
+            <textarea class="form-control" id="details" th:field="*{details}" required></textarea>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</main>
+</body>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</html>

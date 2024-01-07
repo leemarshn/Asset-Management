@@ -60,11 +60,11 @@ public class Organization{
 
     @OneToOne
     @JoinColumn(name = "created_by_id")
-    private Person createdBy;
+    private Employee createdBy;
 
     @OneToOne
     @JoinColumn(name = "modified_by_id")
-    private Person modifiedBy;
+    private Employee modifiedBy;
 
     @CreatedDate
     private LocalDateTime createdAt;

@@ -27,7 +27,7 @@
     </div>
 
     <div style="width:100%;overflow:auto; max-height:300px;">
-        <a href="/organizations/new" class="text-primary">New Organization</a>
+        <a href="/organization/new" class="text-primary">New Organization</a>
         <table class="table table-sm" style="width:100%;">
         <thead>
         <tr>
@@ -47,7 +47,7 @@
             <td th:text="${organizationDTO.pinNumber}"></td>
 
             <td>
-                <a th:href="@{/organizations/edit/{id}(id=${organizationDTO.id})}" class="btn btn-sm btn-primary">
+                <a th:href="@{/organization/edit/{id}(id=${organizationDTO.id})}" class="btn btn-sm btn-primary">
                     <i class="fas fa-edit"></i>
                 </a>
                 <button th:data-id="${organizationDTO.id}" onclick="deleteOrganization(this.getAttribute('data-id'))" class="btn btn-sm btn-danger">
@@ -62,4 +62,5 @@
 
 </main>
 <div th:insert="~{fragments/footer :: footer}"></div>
+</body>
 </html>
