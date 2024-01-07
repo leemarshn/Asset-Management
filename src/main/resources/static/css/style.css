@@ -1,3 +1,16 @@
+/* searchbar */
+.input-group.md-form.form-sm.form-2 input {
+    border: 1px solid #bdbdbd;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+
+
+
+
+
+
 /* Apply Molengo font to the header and organization name */
 h3, h4 {
     font-family: 'Molengo', sans-serif;
@@ -32,10 +45,10 @@ h3, h4 {
     margin-bottom: 10px;
 }
 
-.form-control {
-    border-radius: 5px !important;
-    margin-right: 10px;
-}
+/*.form-control {*/
+/*    border-radius: 5px !important;*/
+/*    margin-right: 10px;*/
+/*}*/
 
 .search-input:last-child {
     margin-right: 0 !important;

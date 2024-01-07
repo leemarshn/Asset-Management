@@ -8,12 +8,11 @@ public class OrganizationDTO {
     private Long id;
     private String name;
     private String phoneNumber;
-    private Integer pinNumber;
+    private String pinNumber;
     private String emailAddress;
 
-    // Constructors, getters, and setters
 
-    public OrganizationDTO(Long id, String name, String phoneNumber, Integer pinNumber, String emailAddress) {
+    public OrganizationDTO(Long id, String name, String phoneNumber, String pinNumber, String emailAddress) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -45,11 +44,11 @@ public class OrganizationDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public Integer getPinNumber() {
+    public String getPinNumber() {
         return pinNumber;
     }
 
-    public void setPinNumber(Integer pinNumber) {
+    public void setPinNumber(String pinNumber) {
         this.pinNumber = pinNumber;
     }
 

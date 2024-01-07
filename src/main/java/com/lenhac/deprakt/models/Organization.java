@@ -47,7 +47,7 @@ public class Organization{
     private String emailAddress;
 
     @Column(name = "pin_number")
-    private Integer pinNumber;
+    private String pinNumber;
 
     @Column(name = "logo_path")
     private String logoPath;

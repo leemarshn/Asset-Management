@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,29 +29,42 @@ public class OrganizationController {
         this.organizationService = organizationService;
     }
 
-    @GetMapping("/organization/new")
+    @GetMapping("/organizations/new")
     public String newOrganizationForm(Model model) {
         model.addAttribute("organizationForm", new Organization());
         return "add_organization";
     }
 
-    @PostMapping("/organization/new")
-    public String createOrganization(@Valid @ModelAttribute Organization organizationForm, BindingResult bindingResult) {
+    @PostMapping("/organizations/new")
+    public String createOrganization(@Valid @ModelAttribute Organization organizationForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            return "add_organization";
+            return "add_organization"; // Return to the form if errors exist
         }
 
-        // Map form fields to entity fields (assuming you've handled this appropriately)
-//        Organization organization = new Organization();
-        // ... (set organization fields using data from organizationForm)
-
-        organizationService.saveOrganization(organizationForm); // Use the service to save
-
-        return "redirect:/organization/new";
+        Organization organization = new Organization();
+        organization.setName(organizationForm.getName());
+        String uniqueName = organizationForm.getUniqueName().toLowerCase().trim().replaceAll("\\s+|\\W+", "");
+        organization.setUniqueName(uniqueName);
+        organization.setPhoneNumber(organizationForm.getPhoneNumber());
+        organization.setEmailAddress(organizationForm.getEmailAddress());
+        organization.setLogoPath(organizationForm.getLogoPath());
+        organization.setPinNumber(organizationForm.getPinNumber());
+        organization.setNotes(organizationForm.getNotes());
+        try {
+            organizationService.saveOrganization(organization);
+            redirectAttributes.addFlashAttribute("success", "Organization added successfully!");
+            return "redirect:/organizations";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error saving organization: " + e.getMessage());
+            return "redirect:/organizations/new";
+        }
     }
 
-    @GetMapping("/organization")
+
+
+    @GetMapping("/organizations")
     public String showOrganizations(Model model) {
+
         List<Organization> organizations = organizationService.getAllOrganizations();
 
         // Fetch only necessary fields for efficiency

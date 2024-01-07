@@ -8,9 +8,17 @@
 <div th:insert="~{fragments/bootstrap :: bootstrap}"></div>
 <div th:insert="~{fragments/menu :: menu}"></div>
 <main class="container mt-5">
-  <h4 style="color: red">Create New Asset</h4>
+  <h4 style="color: red">Create New Organization</h4>
 
-  <form class="border p-4 bg-light" th:action="@{/organization/new}" method="post" th:object="${organizationForm}">
+  <div th:if="${success}" class="alert alert-success" role="alert">
+    Category added successfully!
+  </div>
+
+  <div th:if="${error}" class="alert alert-danger" role="alert">
+    <strong>Error!</strong> <span th:text="${error}"></span>
+  </div>
+
+  <form class="border p-4 bg-light" th:action="@{/organizations/new}" method="post" th:object="${organizationForm}">
 
     <div class="form-row">
       <div class="form-group col-md-6">
@@ -37,7 +45,7 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="pinNumber">PIN Number:</label>
-        <input type="number" class="form-control" id="pinNumber" th:field="*{pinNumber}">
+        <input type="text" class="form-control" id="pinNumber" th:field="*{pinNumber}">
       </div>
       <div class="form-group col-md-8">
         <label for="logoPath">Logo Path:</label>
