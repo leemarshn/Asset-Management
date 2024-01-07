@@ -49,7 +49,7 @@ public class AuthenticationService {
 
 
 
-        credentials.setEmployee(employeeRepository.getOrganizationIdByEmployeeId(employeeId));
+        credentials.setEmployee(employeeRepository.getOrganizationIdById(employeeId));
         credentialsRepository.save(credentials);
     }
 

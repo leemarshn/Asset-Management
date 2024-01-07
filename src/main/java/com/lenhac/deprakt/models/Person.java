@@ -8,13 +8,17 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-  // Mark as an entity
+@Entity  // Mark as an entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Person extends Base {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto-generate ID
+    private Long id;
 
     @Column(nullable = false)
     private String firstName;

@@ -42,37 +42,22 @@ public class EmployeeController {
     }
 
     @PostMapping("/organization/employee/new")
-    public String createEmployee(@Valid @ModelAttribute Employee employeeForm, BindingResult bindingResult,
-                        RedirectAttributes redirectAttributes){
+    public String createEmployee(@Valid @ModelAttribute("employeeForm") Employee employeeForm, BindingResult bindingResult,
+                                 RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "employeeForm";
         }
 
         try {
-
-            //please note: employee inherits from person
-
-            Employee employee = new Employee();
-            employee.setFirstName(employeeForm.getFirstName());
-            employee.setLastName(employeeForm.getLastName());
-            employee.setEmail(employeeForm.getEmail());
-            employee.setPhoneNumber(employeeForm.getPhoneNumber());
-            employee.setDetails(employeeForm.getDetails());
-            employee.setDateOfBirth(employeeForm.getDateOfBirth());
-
-            employee.setNationalId(employeeForm.getNationalId());
-            employee.setEmploymentStartDate(employeeForm.getEmploymentStartDate());
-            employee.setStatus(employeeForm.getStatus());
-            employee.setOrganization(employeeForm.getOrganization());
-
-            employeeRepository.save(employee);
+            Employee employee = employeeRepository.save(employeeForm); // Cascades to Person
             redirectAttributes.addFlashAttribute("success", "Employee created successfully!");
             return "redirect:/organization/employees";
-        }catch (InvalidException e){
+        } catch (InvalidException e) {
             redirectAttributes.addFlashAttribute("error", "Error creating employee: " + e.getMessage());
             return "redirect:/organization/employee/new";
         }
     }
+
 
     @GetMapping("/employees")  // Assuming you want to map this method to "/employees"
     public String showEmployees(Model model) {
@@ -82,7 +67,7 @@ public class EmployeeController {
         // Fetch only necessary fields and include role name
         List<EmployeeDTO> employeeDTOs = employees.stream()
                 .map(employee -> new EmployeeDTO(
-                        employee.getEmployeeId(),
+                        employee.getId(),
                         employee.getFirstName().concat(" ").concat(employee.getLastName()),
                         employee.getEmail(),
                         employee.getPhoneNumber(),

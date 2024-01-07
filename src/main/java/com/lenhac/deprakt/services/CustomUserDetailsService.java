@@ -37,7 +37,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
 
-            Long employeeId = credentials.getEmployee().getEmployeeId();
+            Long employeeId = credentials.getEmployee().getId();
             Collection<? extends GrantedAuthority> authorities = credentials.getRoles()
                     .stream()
                     .map(role -> new SimpleGrantedAuthority(role.getName()))

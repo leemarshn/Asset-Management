@@ -8,17 +8,16 @@ import java.util.List;
 @Entity
 @Table(name = "departments")
 @Data
-public class Department extends Base {
+public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "department_id", updatable = false, nullable = false)
     private Long Id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "department")  // Map to the 'department' field in the Employee class
+    @OneToMany(mappedBy = "department")
     private List<Employee> employees;
 
 }

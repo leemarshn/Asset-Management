@@ -11,12 +11,13 @@ import java.time.LocalDate;
 @Table(name = "employees")
 @Getter
 @Setter
+@PrimaryKeyJoinColumn(name="person_id")
 public class Employee  extends Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id", updatable = false, nullable = false)
-    private Long employeeId;
+    private Long id;
 
     @Column(name = "national_id", nullable = false, unique = true)
     private String nationalId;
@@ -27,7 +28,7 @@ public class Employee  extends Person {
     @Column(nullable = false)
     private Status status;
 
-    @OneToOne(mappedBy = "employee")  // Change to "employee"
+    @OneToOne(mappedBy = "employee")
     private Credentials credentials;
 
     private String Position;
@@ -36,7 +37,7 @@ public class Employee  extends Person {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @ManyToOne(fetch = FetchType.LAZY) // Consider eager loading if needed
+    @ManyToOne
     @JoinColumn(name = "organization_id")
     private Organization organization;
 
