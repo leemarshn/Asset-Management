@@ -55,16 +55,16 @@ public class Organization{
     @Column(name = "notes")
     private String notes;
 
-    @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
-    private List<Employee> employees = new ArrayList<>();
+//    @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
+//    private List<Employee> employees = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name = "created_by_id")
-    private Employee createdBy;
+//    @OneToOne
+//    @JoinColumn(name = "created_by_id")
+//    private Employee createdBy;
 
-    @OneToOne
-    @JoinColumn(name = "modified_by_id")
-    private Employee modifiedBy;
+//    @OneToOne
+//    @JoinColumn(name = "modified_by_id")
+//    private Employee modifiedBy;
 
     @CreatedDate
     private LocalDateTime createdAt;

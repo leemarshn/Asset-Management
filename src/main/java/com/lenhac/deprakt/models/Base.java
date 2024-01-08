@@ -14,17 +14,17 @@ import java.time.LocalDateTime;
 @Setter
 public abstract class Base {
 
-    @ManyToOne
-    @JoinColumn(name = "created_by_id")
-    private Employee createdBy;
+//    @ManyToOne
+//    @JoinColumn(name = "created_by_id")
+//    private Employee createdBy;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "modified_by_id")
+//    private Employee modifiedBy;
 
-    @ManyToOne
-    @JoinColumn(name = "modified_by_id")
-    private Employee modifiedBy;
-
-    @ManyToOne
-    @JoinColumn(name = "organization_id")
-    private Organization organization;
+//    @ManyToOne
+//    @JoinColumn(name = "organization_id")
+//    private Organization organization;
 
     @CreatedDate
     private LocalDateTime createdAt;

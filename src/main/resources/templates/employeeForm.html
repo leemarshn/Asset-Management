@@ -21,20 +21,19 @@
     </div>
 
 
-    <form th:action="@{/organization/employee/new}" th:object="${employeeForm}" method="post" class="needs-validation" novalidate>
+    <form th:action="@{/organization/employee/new}" th:object="${employeeForm}" method="post">
 
-        <!-- Person details -->
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="firstName">First Name:</label>
-                    <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required/>
+                    <input type="text" class="form-control" id="firstName" th:field="*{personForm.firstName}" required/>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="lastName">Last Name:</label>
-                    <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required/>
+                    <input type="text" class="form-control" id="lastName" th:field="*{personForm.lastName}" required/>
                 </div>
             </div>
         </div>
@@ -44,27 +43,27 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" th:field="*{email}" required/>
+                    <input type="email" class="form-control" id="email" th:field="*{personForm.email}" required/>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="phoneNumber">Phone Number:</label>
-                    <input type="tel" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" required/>
+                    <input type="tel" class="form-control" id="phoneNumber" th:field="*{personForm.phoneNumber}" required/>
                 </div>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="department" class="col-sm-2 col-form-label">Department</label>
-            <div class="col-sm-10">
-                <select class="form-control" id="department" th:field="*{department}">
-                    <option th:each="department : ${allDepartments}"
-                            th:value="${department.id}"
-                            th:text="${department.name}">
-                    </option>
-                </select>
-            </div>
+<!--            <label for="department" class="col-sm-2 col-form-label">Department</label>-->
+<!--            <div class="col-sm-10">-->
+<!--                <select class="form-control" id="department" th:field="*{department}">-->
+<!--                    <option th:each="department : ${allDepartments}"-->
+<!--                            th:value="${department.id}"-->
+<!--                            th:text="${department.name}">-->
+<!--                    </option>-->
+<!--                </select>-->
+<!--            </div>-->
         </div>
 
         <div class="form-group row">
@@ -80,7 +79,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="dateOfBirth">Date of Birth:</label>
-                    <input type="date" class="form-control" id="dateOfBirth" th:field="*{dateOfBirth}" required/>
+                    <input type="date" class="form-control" id="dateOfBirth" th:field="*{personForm.dateOfBirth}" required/>
                 </div>
             </div>
             <div class="col-md-4">
@@ -100,7 +99,7 @@
 
         <div class="form-group">
             <label for="details">Details:</label>
-            <textarea class="form-control" id="details" th:field="*{details}" required></textarea>
+            <textarea class="form-control" id="details" th:field="*{personForm.details}" required></textarea>
         </div>
 
 

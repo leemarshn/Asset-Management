@@ -1,44 +1,45 @@
 package com.lenhac.deprakt.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 
 @Entity
 @Table(name = "employees")
 @Getter
 @Setter
-@PrimaryKeyJoinColumn(name="person_id")
-public class Employee  extends Person {
+public class Employee{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id", updatable = false, nullable = false)
     private Long id;
 
-    @Column(name = "national_id", nullable = false, unique = true)
+    @Size(min = 7, max = 12)
     private String nationalId;
 
-    @Column(nullable = false)
-    private LocalDate employmentStartDate;
+    private Date employmentStartDate;
 
     @Column(nullable = false)
-    private Status status;
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.ACTIVE;
 
     @OneToOne(mappedBy = "employee")
     private Credentials credentials;
 
     private String Position;
 
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
+    @OneToOne
+    @JoinColumn(name = "person_id", nullable = false)
+    private Person personForm;
 
-    @ManyToOne
-    @JoinColumn(name = "organization_id")
-    private Organization organization;
+
+//    @ManyToOne
+//    @JoinColumn(name = "department_id")
+//    private Department department;
+
 
 }
